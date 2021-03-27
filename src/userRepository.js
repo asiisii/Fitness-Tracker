@@ -1,24 +1,19 @@
 const User = require('../src/user.js')
 
 class UserRepository {
-  constructor() {
-    this.allUsers = [];
-  }
-
-  generateUser(userData) {
-    userData.forEach(user => this.allUsers.push(new User(user)));
+  constructor(userData) {
+    this.users = [];
+    userData.forEach(user => this.users.push(new User(user)));
   }
 
   getUserData(userID) {
-    return this.allUsers.find(ele => ele.id === userID);
+    return this.users.find(user => user.id === userID);
   }
-  getAverageStep(inputArray, start) {
-    const goals = [];
-    for (var i = 0; i < inputArray.length; i++) {
-      goals.push(inputArray[i].dailyStepGoal);
+  getAverageStep() {
+    if(!this.users || !this.users.length) {
+      return 0;
     }
-    const average = goals.reduce((goal, start) => goal + start) / goals.length;
-    return average;
+    return this.users.map(user => user.dailyStepGoal).reduce((total, stepgoal) => total += stepgoal) / this.users.length;
   }
 
 }

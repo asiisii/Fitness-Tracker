@@ -28,27 +28,15 @@ describe('User Repository', () => {
       },
     ]
 
-    userRepository = new UserRepository(userInfo);
+    userRepository = new UserRepository(userData);
   })
 
   it('should be a function', () => {
     expect(UserRepository).to.be.a('function')
   })
 
-  it('should be an instance of User Repository', () => {
-    userRepository.generateUser(userData);
-    expect(userRepository).to.be.an.instanceOf(UserRepository)
-  })
-
-  it('should take in id and display user info', () => {
-    userRepository.generateUser(userData)
-
-    expect(userRepository.getUserData(userData[0].id)).to.deep.equal(userData[0])
-    expect(userRepository.getUserData(userData[1].id)).to.deep.equal(userData[1])
-  })
-
   it('should produce an average step count', () => {
-    expect(userRepository.getAverageStep(userData, 0)).to.deep.equal(7500)
+    expect(userRepository.getAverageStep()).to.deep.equal(7500)
   })
 
 })
