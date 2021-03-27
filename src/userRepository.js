@@ -20,7 +20,7 @@ class UserRepository {
     const average = goals.reduce((goal, start) => goal + start) / goals.length;
     return average;
   }
-  
+
 }
 
 if (typeof module !== 'undefined') {
