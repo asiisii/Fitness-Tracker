@@ -12,6 +12,11 @@ class User {
   getFirstName() {
     return this.name.split(' ')[0];
   }
+
+  getAverageFluidOunces(hydrationData) {
+    const hydration = hydrationData.filter(data => data.userID === this.id);
+    return hydration.map(data => data.numOunces).reduce((total, current) => total + current) / hydration.length;
+  }
 }
 
 

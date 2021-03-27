@@ -7,6 +7,7 @@ const userEmail = document.getElementById('userEmail');
 const userStride = document.getElementById('userStride');
 const userGoal = document.getElementById('userGoal');
 const userFriends = document.getElementById('userFriends');
+const userAverageFluidOunces = document.getElementById('userAverageFluidOunces');
 
 const usersArray = userData.map(user => new User(user))
 const repository = new UserRepository(usersArray);
@@ -27,5 +28,6 @@ function renderUser() {
   userStride.innerText = displayUser.strideLength;
   userGoal.innerText = displayUser.dailyStepGoal;
   userFriends.innerText = displayUser.friends.map(friendid => repository.getUserData(friendid).getFirstName()).join(", ");
+  userAverageFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData);
 }
 
