@@ -1,5 +1,6 @@
 //Variables
 const welcome = document.getElementById('welcome');
+const date = document.getElementById('date');
 const userInfo = document.getElementById('userInfo');
 const userName = document.getElementById('userName');
 const userAddress = document.getElementById('userAddress');
@@ -16,6 +17,7 @@ let displayUser = repository.getUserData(1);
 //EventListeners
 window.addEventListener('DOMContentLoaded', (event) => {
   renderUser();
+  renderDate();
 });
 
 //Functions
@@ -27,7 +29,10 @@ function renderUser() {
   userEmail.innerText = displayUser.email;
   userStride.innerText = displayUser.strideLength;
   userGoal.innerText = displayUser.dailyStepGoal;
-  userFriends.innerText = displayUser.friends.map(friendid => repository.getUserData(friendid).getFirstName()).join(", ");
+  userFriends.innerText = displayUser.friends.map(friendID => repository.getUserData(friendID).getFirstName()).join(", ");
   userAverageFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData);
 }
 
+function renderDate() {
+  date.innerText = new Date();
+}
