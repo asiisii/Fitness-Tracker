@@ -37,9 +37,10 @@ describe('User Repository', () => {
 
   it('should be an instance of User Repository', () => {
     userRepository.generateUser(userData);
+    expect(userRepository).to.be.an.instanceOf(UserRepository)
   })
 
-  it('should be an instance of User Repository', () => {
+  it('should take in id and display user info', () => {
     userRepository.generateUser(userData) 
 
     expect(userRepository.getUserData(userData[0].id)).to.deep.equal(userData[0])
