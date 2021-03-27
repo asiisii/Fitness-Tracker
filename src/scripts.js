@@ -21,5 +21,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
 function renderUser() {
   welcome.innerText = `Welcome ${displayUser.getFirstName()}!`
+  userName.innerText = displayUser.name;
+  userAddress.innerText = displayUser.address;
+  userEmail.innerText = displayUser.email;
+  userStride.innerText = displayUser.strideLength;
+  userGoal.innerText = displayUser.dailyStepGoal;
+  userFriends.innerText = displayUser.friends.map(friendid => repository.getUserData(friendid).getFirstName()).join(", ");
 }
 
