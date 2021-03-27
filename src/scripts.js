@@ -17,7 +17,7 @@ let displayUser = repository.getUserData(1);
 //EventListeners
 window.addEventListener('DOMContentLoaded', (event) => {
   renderUser();
-  renderDate();
+  date.value = getDate(new Date());
 });
 
 //Functions
@@ -33,6 +33,7 @@ function renderUser() {
   userAverageFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData);
 }
 
-function renderDate() {
-  date.innerText = new Date();
+function getDate(date) {
+  return date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) +
+    '-' + date.getDate().toString().padStart(2, 0);
 }
