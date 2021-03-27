@@ -37,6 +37,7 @@ describe('User Repository', () => {
 
   it('should be an instance of User Repository', () => {
     userRepository.generateUser(userData);
+    expect(userRepository).to.be.an.instanceOf(UserRepository)
   })
 
   it('should take in id and display user info', () => {
