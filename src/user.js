@@ -13,8 +13,14 @@ class User {
     return this.name.split(' ')[0];
   }
 
-  getAverageFluidOunces(hydrationData) {
-    const hydration = hydrationData.filter(data => data.userID === this.id);
+  getAverageFluidOunces(hydrationData, date) {
+    let hydration = hydrationData.filter(data => data.userID === this.id);
+    if(typeof date === "string") {
+      hydration = hydration.filter(data => data.date === date);
+      if(!hydration.length) {
+        return 0;
+      }
+    }
     return hydration.map(data => data.numOunces).reduce((total, current) => total + current) / hydration.length;
   }
 }
