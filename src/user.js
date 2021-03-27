@@ -9,7 +9,9 @@ class User {
     this.friends = userData.friends
   }
 
-
+  getFirstName() {
+    return this.name.split(' ')[0];
+  }
 }
 
 
