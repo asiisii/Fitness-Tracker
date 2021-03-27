@@ -1,24 +1,11 @@
-const UserRepository = require('./userRepository.js')
-const User = require('./user.js')
-const userData = require('../data/users.js')
-
 //Variables
-// const welcome = document.getElementById('welcome');
+const welcome = document.getElementById('welcome');
 
 //EventListeners
 
 //Functions
 
-console.log(userData);
+const usersArray = userData.map(user => new User(user))
 
-// let repository = new UserRepository()
-//
-// console.log(repository.allUsers);
-//
-// let users = repository.generateUser(userData);
-//
-// console.log(repository);
-//
-// console.log(repository.allUsers);
-//
-// console.log(users);
+let repository = new UserRepository(usersArray);
+

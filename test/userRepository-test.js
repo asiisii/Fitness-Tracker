@@ -2,6 +2,7 @@ const chai = require('chai')
 const expect = chai.expect
 
 const UserRepository = require('../src/userRepository')
+const User = require('../src/user')
 
 describe('User Repository', () => {
   let userData, userRepository, userInfo
@@ -27,8 +28,8 @@ describe('User Repository', () => {
         "friends": [ 9, 18, 24, 19 ]
       },
     ]
-
-    userRepository = new UserRepository(userData);
+    const usersArray = userData.map(user => new User(user));
+    userRepository = new UserRepository(usersArray);
   })
 
   it('should be a function', () => {

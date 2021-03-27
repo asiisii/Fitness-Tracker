@@ -1,9 +1,9 @@
-const User = require('../src/user.js')
+
 
 class UserRepository {
-  constructor(userData) {
-    this.users = [];
-    userData.forEach(user => this.users.push(new User(user)));
+  constructor(userArray) {
+    this.users = userArray;
+
   }
 
   getUserData(userID) {
