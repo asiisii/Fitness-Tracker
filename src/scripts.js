@@ -41,16 +41,16 @@ function getDate(date) {
 }
 
 function getWeek(date) {
-  var tdt = new Date(date.valueOf());
-  var dayn = (date.getDay() + 6) % 7;
+  var newDate = new Date(date.valueOf());
+  var day = (date.getDay() + 6) % 7;
 
-  tdt.setDate(tdt.getDate() - dayn + 3);
+  newDate.setDate(newDate.getDate() - day + 3);
 
-  var firstThursday = tdt.valueOf();
-  tdt.setMonth(0, 1);
+  var firstThursday = newDate.valueOf();
+  newDate.setMonth(0, 1);
 
-  if (tdt.getDay() !== 4) {
-    tdt.setMonth(0, 1 + ((4 - tdt.getDay()) + 7) % 7);
+  if (newDate.getDay() !== 4) {
+    newDate.setMonth(0, 1 + ((4 - newDate.getDay()) + 7) % 7);
   }
-  return date.getFullYear().toString() + '-W' + (1 + Math.ceil((firstThursday - tdt) / 604800000));
+  return date.getFullYear().toString() + '-W' + (1 + Math.ceil((firstThursday - newDate) / 604800000));
 }
