@@ -1,5 +1,3 @@
-
-
 class UserRepository {
   constructor(userArray) {
     this.users = userArray;
@@ -9,6 +7,7 @@ class UserRepository {
   getUserData(userID) {
     return this.users.find(user => user.id === userID);
   }
+
   getAverageStep() {
     if(!this.users || !this.users.length) {
       return 0;
