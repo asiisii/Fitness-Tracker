@@ -9,7 +9,9 @@ class UserRepository {
     userData.forEach(user => this.allUsers.push(new User(user)));
   }
 
-  
+  getUserData(userID) {
+    return this.allUsers.find(ele => ele.id === userID);
+  }
 
 }
 
