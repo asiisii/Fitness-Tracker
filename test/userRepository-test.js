@@ -5,7 +5,7 @@ const UserRepository = require('../src/userRepository')
 
 describe('User Repository', () => {
   let userData, userRepository, userInfo
-  
+
   beforeEach(() => {
     userData = [
       {
@@ -25,9 +25,9 @@ describe('User Repository', () => {
         "strideLength": 4.5,
         "dailyStepGoal": 5000,
         "friends": [ 9, 18, 24, 19 ]
-      }, 
+      },
     ]
-    
+
     userRepository = new UserRepository(userInfo);
   })
 
@@ -41,11 +41,14 @@ describe('User Repository', () => {
   })
 
   it('should take in id and display user info', () => {
-    userRepository.generateUser(userData) 
+    userRepository.generateUser(userData)
 
     expect(userRepository.getUserData(userData[0].id)).to.deep.equal(userData[0])
     expect(userRepository.getUserData(userData[1].id)).to.deep.equal(userData[1])
   })
 
-})
+  it('should produce an average step count', () => {
+    expect(userRepository.getAverageStep(userData, 0)).to.deep.equal(7500)
+  })
 
+})
