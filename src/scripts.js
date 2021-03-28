@@ -16,6 +16,7 @@ const userAverageFluidOunces = document.getElementById('userAverageFluidOunces')
 const usersArray = userData.map(user => new User(user))
 const repository = new UserRepository(usersArray);
 
+let filterWeek = null;
 let filterDate = null;
 let displayUser = repository.getUserData(1);
 
@@ -29,11 +30,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
 // The time is required because of the weird way that HTML and Javascript read a date.
 date.addEventListener('change', (event) => {
   filterDate = new Date(date.value + ':0:0:0');
+  filterWeek = null;
   renderUser();
+  date.value = getDate(new Date());
 })
 
 week.addEventListener('change', (event) => {
-  getDateForWeek(week.value);
+  filterWeek = getDatesOfWeek(getDateForWeek(week.value));
+  filterDate = null;
+  renderUser();
+  week.value = getWeek(new Date());
 })
 
 //Functions
@@ -50,6 +56,9 @@ function renderUser() {
   if(filterDate) {
     fluidOuncesHeader.innerText = `Fluid Ounces on ${getShortDate(filterDate)}`
     userAverageFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData, getShortDate(filterDate));
+  } else if(filterWeek){
+    fluidOuncesHeader.innerText = `Fluid Ounces on week of ${getShortDate(filterWeek[0])}`;
+    userAverageFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData, filterWeek.map(date => getShortDate(date)));
   } else {
     userAverageFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData);
   }
@@ -83,6 +92,7 @@ function getWeek(date) {
   return date.getFullYear().toString() + '-W' + (1 + Math.ceil((firstThursday - newDate) / 604800000));
 }
 
+//Dates are not universal across years, they don't work if you use "standard" dates programatically. It gets the first day of the week for a corresponding week number.
 function getDateForWeek(week) {
   const yearWeek = week.split('-');
   const yearNumber = Number(yearWeek[0]);
@@ -99,4 +109,14 @@ function getDateForWeek(week) {
       weekStart.setDate(firstDateOfWeek.getDate() + 8 - firstDateOfWeek.getDay());
   }
   return weekStart;
+}
+
+function getDatesOfWeek(date) {
+  const daysInWeek = [date];
+  [1, 2, 3, 4, 5, 6].forEach(dayNumber => {
+    const dayOfWeek = new Date(date.valueOf());
+    dayOfWeek.setDate(dayOfWeek.getDate() + dayNumber);
+    daysInWeek.push(dayOfWeek);
+  })
+  return daysInWeek;
 }
