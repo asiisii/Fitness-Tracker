@@ -55,6 +55,16 @@ function getDatesOfWeek(date) {
   return daysInWeek;
 }
 
+function getLastSevenDays(date) {
+  const daysInWeek = [date];
+  [1, 2, 3, 4, 5, 6].forEach(dayNumber => {
+    const dayOfWeek = new Date(date.valueOf());
+    dayOfWeek.setDate(dayOfWeek.getDate() - dayNumber);
+    daysInWeek.push(dayOfWeek);
+  })
+  return daysInWeek;
+}
+
 if (typeof module !== 'undefined') {
   module.exports = {
     getDate,
@@ -64,3 +74,4 @@ if (typeof module !== 'undefined') {
     getDatesOfWeek,
   };
 }
+

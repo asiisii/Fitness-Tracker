@@ -3,6 +3,10 @@ const welcome = document.getElementById('welcome');
 const date = document.getElementById('date');
 const week = document.getElementById('week');
 const fluidOuncesHeader = document.getElementById('fluidOuncesHeader');
+const fluidOuncesDateHeader = document.getElementById('fluidOuncesDateHeader');
+const userDateFluidOunces = document.getElementById('userDateFluidOunces');
+const fluidOuncesWeekHeader = document.getElementById('fluidOuncesWeekHeader');
+const userAverageWeekFluidOunces = document.getElementById('userAverageWeekFluidOunces');
 
 const userInfo = document.getElementById('userInfo');
 const userName = document.getElementById('userName');
