@@ -33,20 +33,7 @@ date.addEventListener('change', (event) => {
 })
 
 week.addEventListener('change', (event) => {
-  const yearWeek = week.value.split('-');
-  const yearNumber = Number(yearWeek[0]);
-  // Back slash capital D is a special character that represents non digit characters, lower case is the opposite.
-  const weekNumber = Number(yearWeek[1].replace(/\D/g, ""));
-  const firstDateOfWeek = new Date(yearNumber, 0, 1 + (weekNumber - 1) * 7);
-  var dayOfWeek = firstDateOfWeek.getDay();
-  var ISOweekStart = firstDateOfWeek;
-  // The number of weeks changes because of how many days are in the first week of the year.  So it gets real fucky.  Found this online. https://stackoverflow.com/questions/16590500/javascript-calculate-date-from-week-number
-  if (dayOfWeek <= 4) {
-      ISOweekStart.setDate(firstDateOfWeek.getDate() - firstDateOfWeek.getDay() + 1);
-  }
-  else {
-      ISOweekStart.setDate(firstDateOfWeek.getDate() + 8 - firstDateOfWeek.getDay());
-  }
+  getDateForWeek(week.value);
 })
 
 //Functions
@@ -94,4 +81,22 @@ function getWeek(date) {
     newDate.setMonth(0, 1 + ((4 - newDate.getDay()) + 7) % 7);
   }
   return date.getFullYear().toString() + '-W' + (1 + Math.ceil((firstThursday - newDate) / 604800000));
+}
+
+function getDateForWeek(week) {
+  const yearWeek = week.split('-');
+  const yearNumber = Number(yearWeek[0]);
+  // Back slash capital D is a special character that represents non digit characters, lower case is the opposite.
+  const weekNumber = Number(yearWeek[1].replace(/\D/g, ""));
+  const firstDateOfWeek = new Date(yearNumber, 0, 1 + (weekNumber - 1) * 7);
+  var dayOfWeek = firstDateOfWeek.getDay();
+  var weekStart = firstDateOfWeek;
+  // The number of weeks changes because of how many days are in the first week of the year.  So it gets real fucky.  Found this online. https://stackoverflow.com/questions/16590500/javascript-calculate-date-from-week-number
+  if (dayOfWeek <= 4) {
+      weekStart.setDate(firstDateOfWeek.getDate() - firstDateOfWeek.getDay() + 1);
+  }
+  else {
+      weekStart.setDate(firstDateOfWeek.getDate() + 8 - firstDateOfWeek.getDay());
+  }
+  return weekStart;
 }
