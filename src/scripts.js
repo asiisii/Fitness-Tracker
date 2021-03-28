@@ -7,6 +7,8 @@ const fluidOuncesDateHeader = document.getElementById('fluidOuncesDateHeader');
 const userDateFluidOunces = document.getElementById('userDateFluidOunces');
 const fluidOuncesWeekHeader = document.getElementById('fluidOuncesWeekHeader');
 const userAverageWeekFluidOunces = document.getElementById('userAverageWeekFluidOunces');
+const lastSevenDaysHeader = document.getElementById('lastSevenDaysHeader');
+const lastSevenDays = document.getElementById('lastSevenDays');
 
 const userInfo = document.getElementById('userInfo');
 const userName = document.getElementById('userName');
@@ -66,4 +68,10 @@ function renderUser() {
   } else {
     userAverageFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData);
   }
+  let table = "<table>"
+  getLastSevenDays(new Date()).forEach(date => {
+    table += `<tr><th>${getShortDate(date)}</th><td>${displayUser.getAverageFluidOunces(hydrationData, getShortDate(date))}</td></tr>`
+  })
+  table += "</table>";
+  lastSevenDays.innerHTML = table;
 }
