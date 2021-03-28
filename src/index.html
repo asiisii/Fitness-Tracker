@@ -6,19 +6,58 @@
   </head>
   <body>
     <header>
-      <h1 id="welcome" class="welcome"><h1>
-      <h2 id="userInfo" class="user-info"><h2>
-      <h2 id="userList" class="user-list"><h2>
-      <h3 id="date" class="date"><h3>
+      <h1 id="welcome" class="welcome"></h1>
+      <h2 id="userList" class="user-list"></h2>
+      <h3 id="date" class="date"></h3>
     </header>
-    <section id="tracker" class="tracker">
+    <main id="tracker" class="tracker">
+      <section id="userInfo" class="user-info">
+        <table>
+          <tr>
+            <th>
+              Name:
+            </th>
+            <td id="userName"></td>
+          </tr>
+           <tr>
+            <th>
+              Address:
+            </th>
+            <td id="userAddress"></td>
+          </tr>
+           <tr>
+            <th>
+              Email:
+            </th>
+            <td id="userEmail"></td>
+          </tr>
+           <tr>
+            <th>
+              Stride Length:
+            </th>
+            <td id="userStride"></td>
+          </tr>
+           <tr>
+            <th>
+              Step Goal:
+            </th>
+            <td id="userGoal"></td>
+          </tr>
+           <tr>
+            <th>
+              Friends:
+            </th>
+            <td id="userFriends"></td>
+          </tr>
+        </table>
+      </section>
       <div id="hydration" class="hydration">
       </div>
       <div id="sleep" class="sleep">
       </div>
       <div id="activity" class="activity">
       </div>
-    </section>
+    </main>
     <script type="text/javascript" src="../src/userRepository.js"></script>
     <script type="text/javascript" src="../src/user.js"></script>
     <script type="text/javascript" src="../data/users.js"></script>
