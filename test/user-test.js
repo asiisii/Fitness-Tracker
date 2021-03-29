@@ -5,8 +5,15 @@ const User = require('../src/user.js')
 
 describe('User', () => {
   let userData, user1, user2
-  
+
   beforeEach(() => {
+    hydrationData = [
+      {
+        "userID": 1,
+        "date": "2019/06/15",
+        "numOunces": 37
+      }
+    ]
     userData = [
       {
         "id": 1,
@@ -25,7 +32,7 @@ describe('User', () => {
         "strideLength": 4.5,
         "dailyStepGoal": 5000,
         "friends": [ 9, 18, 24, 19 ]
-      }, 
+      },
     ]
     user1 = new User(userData[0])
     user2 = new User(userData[1])
@@ -77,6 +84,11 @@ describe('User', () => {
   it('should return user\'s first name only', () => {
     expect(user1.getFirstName()).to.equal('Luisa')
     expect(user2.getFirstName()).to.equal('Jarvis')
+  })
+
+  it('should return a users average fluid ounces', () => {
+    expect(user1.getAverageFluidOunces(hydrationData, "2019/06/15")).to.deep.equal(37);
+
   })
 
 
