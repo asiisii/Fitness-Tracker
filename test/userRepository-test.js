@@ -8,6 +8,14 @@ describe('User Repository', () => {
   let userData, userRepository, userInfo
 
   beforeEach(() => {
+    sleepData = [
+      {
+        "userID": 1,
+        "date": "2019/06/15",
+        "hoursSlept": 6.1,
+        "sleepQuality": 2.2
+      }
+    ]
     userData = [
       {
         "id": 1,
@@ -38,6 +46,10 @@ describe('User Repository', () => {
 
   it('should produce an average step count', () => {
     expect(userRepository.getAverageStep()).to.deep.equal(7500)
+  })
+
+  it('should produce an average sleep among all users', () => {
+    expect(userRepository.getAverageAllSleep()).to.deep.equal(6.1)
   })
 
 })

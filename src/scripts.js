@@ -9,6 +9,8 @@ const fluidOuncesWeekHeader = document.getElementById('fluidOuncesWeekHeader');
 const userAverageWeekFluidOunces = document.getElementById('userAverageWeekFluidOunces');
 const lastSevenDaysHeader = document.getElementById('lastSevenDaysHeader');
 const lastSevenDays = document.getElementById('lastSevenDays');
+const averageAllSleepHeader = document.getElementById('averageAllSleepHeader');
+const averageAllSleep = document.getElementById('averageAllSleep')
 
 const userInfo = document.getElementById('userInfo');
 const userName = document.getElementById('userName');
@@ -51,6 +53,7 @@ week.addEventListener('change', (event) => {
 //Functions
 
 //Renders the inner text of the table that stores all the user info.
+
 function renderUser() {
   welcome.innerText = `Welcome ${displayUser.getFirstName()}!`
   userName.innerText = displayUser.name;
@@ -59,11 +62,12 @@ function renderUser() {
   userStride.innerText = displayUser.strideLength;
   userGoal.innerText = displayUser.dailyStepGoal;
   userFriends.innerText = displayUser.friends.map(friendID => repository.getUserData(friendID).getFirstName()).join(", ");
+  averageAllSleep.innerText = repository.getAverageAllSleep();
   if(filterDate) {
     fluidOuncesDateHeader.innerText = `Fluid Ounces on ${getShortDate(filterDate)} :`
     userDateFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData, getShortDate(filterDate));
   } else if(filterWeek){
-    fluidOuncesWeekHeader.innerText = `Fluid Ounces on week of ${getShortDate(filterWeek[0])}`;
+    fluidOuncesWeekHeader.innerText = `Average Fluid Ounces on week of ${getShortDate(filterWeek[0])}`;
     userAverageWeekFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData, filterWeek.map(date => getShortDate(date)));
   } else {
     userAverageFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData);
