@@ -88,7 +88,6 @@ describe('User', () => {
 
   it('should return a users average fluid ounces', () => {
     expect(user1.getAverageFluidOunces(hydrationData, "2019/06/15")).to.deep.equal(37);
-
   })
 
 
