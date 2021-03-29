@@ -14,9 +14,9 @@ class UserRepository {
     }
     return this.users.map(user => user.dailyStepGoal).reduce((total, stepgoal) => total += stepgoal) / this.users.length;
   }
-  
+
   getAverageAllSleep() {
-    return sleepData.map(user => user.hoursSlept).reduce((total, sleep) => total += sleep) / sleepData.length;
+    return sleepData.map(user => user.sleepQuality).reduce((total, quality) => total += quality) / sleepData.length;
   }
 
 }
