@@ -11,6 +11,8 @@ const lastSevenDaysHeader = document.getElementById('lastSevenDaysHeader');
 const lastSevenDays = document.getElementById('lastSevenDays');
 const averageAllSleepHeader = document.getElementById('averageAllSleepHeader');
 const averageAllSleep = document.getElementById('averageAllSleep')
+const avgHrsSleptPerDayHeader = document.getElementById('avgHrsSleptPerDayHeader')
+const avgHrsSleptPerday = document.getElementById('avgHrsSleptPerday')
 
 const userInfo = document.getElementById('userInfo');
 const userName = document.getElementById('userName');
@@ -63,11 +65,12 @@ function renderUser() {
   userGoal.innerText = displayUser.dailyStepGoal;
   userFriends.innerText = displayUser.friends.map(friendID => repository.getUserData(friendID).getFirstName()).join(", ");
   averageAllSleep.innerText = repository.getAverageAllSleep();
-  if(filterDate) {
-    fluidOuncesDateHeader.innerText = `Fluid Ounces on ${getShortDate(filterDate)} :`
+  avgHrsSleptPerday.innerText = repository.getAverageHrsSlept(); 
+  if (filterDate) {
+    fluidOuncesDateHeader.innerText = `Fluid Ounces on ${getShortDate(filterDate)} :`;
     userDateFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData, getShortDate(filterDate));
-  } else if(filterWeek){
-    fluidOuncesWeekHeader.innerText = `Average Fluid Ounces on week of ${getShortDate(filterWeek[0])}`;
+  } else if (filterWeek) {
+    fluidOuncesWeekHeader.innerText = `Average Fluid Ounces on week of ${getShortDate(filterWeek[0])} :`;
     userAverageWeekFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData, filterWeek.map(date => getShortDate(date)));
   } else {
     userAverageFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData);
@@ -79,3 +82,5 @@ function renderUser() {
   table += "</table>";
   lastSevenDays.innerHTML = table;
 }
+
+

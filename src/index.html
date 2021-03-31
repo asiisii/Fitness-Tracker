@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <title>Activity Tracker</title>
   </head>
   <body>
@@ -80,6 +81,15 @@
       </div>
       <div id="sleep" class="sleep">
         <table>
+          <div id="stepGoal" class="stepGoal">
+            <canvas id="stepGoalCompare" height="50" ></canvas>
+          </div>
+          <tr>
+            <th id="avgHrsSleptPerDayHeader">
+              Average Hours Slept :
+            </th>
+            <td id="avgHrsSleptPerday"></td>
+          </tr>
           <tr>
             <th id="averageAllSleepHeader">
               Average Sleep Quality Across All Users :
@@ -99,5 +109,6 @@
     <script type="text/javascript" src="../data/activity.js"></script>
     <script type="text/javascript" src="../src/date.js"></script>
     <script type="text/javascript" src="./scripts.js"></script>
+    <script type="text/javascript" src="./chart.js"></script>
   </body>
 </html>
