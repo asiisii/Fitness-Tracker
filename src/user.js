@@ -36,12 +36,11 @@ class User {
     return sleptHrs.reduce((total, time) => total += time) / userSleepData.length; 
   }
 
-  getHrsSleptPerDay(sleepData, date) {
+  getSleepInfoByDate(sleepData, date, sleepType) {
     let userSleepData = sleepData.filter(user => user.userID === this.id);
-    let sleptDates = userSleepData.filter(day => day.date === date)
-    console.log(sleptDates[0].hoursSlept);
-    return sleptDates[0].hoursSlept;
+    return userSleepData.filter(day => day.date === date)[0][sleepType]
   }
+
 }
 
 
