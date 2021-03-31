@@ -11,8 +11,9 @@ const lastSevenDaysHeader = document.getElementById('lastSevenDaysHeader');
 const lastSevenDays = document.getElementById('lastSevenDays');
 const averageAllSleepHeader = document.getElementById('averageAllSleepHeader');
 const averageAllSleep = document.getElementById('averageAllSleep')
-const avgHrsSleptPerDayHeader = document.getElementById('avgHrsSleptPerDayHeader')
+
 const avgHrsSleptPerday = document.getElementById('avgHrsSleptPerday')
+const avgQualitySleep = document.getElementById('avgQualitySleep')
 
 const userInfo = document.getElementById('userInfo');
 const userName = document.getElementById('userName');
@@ -65,7 +66,8 @@ function renderUser() {
   userGoal.innerText = displayUser.dailyStepGoal;
   userFriends.innerText = displayUser.friends.map(friendID => repository.getUserData(friendID).getFirstName()).join(", ");
   averageAllSleep.innerText = repository.getAverageAllSleep();
-  avgHrsSleptPerday.innerText = repository.getAverageHrsSlept(); 
+  avgHrsSleptPerday.innerText = displayUser.getAvgHrsSleptPerDay(sleepData, 1)
+  
   if (filterDate) {
     fluidOuncesDateHeader.innerText = `Fluid Ounces on ${getShortDate(filterDate)} :`;
     userDateFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData, getShortDate(filterDate));
