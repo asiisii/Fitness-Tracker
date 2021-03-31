@@ -18,6 +18,9 @@ const hrsSleptByDateHeader = document.getElementById('hrsSleptByDateHeader')
 const hrsSleptByDate = document.getElementById('hrsSleptByDate')
 const qualitySleepByDateHeader = document.getElementById('qualitySleepByDateHeader')
 const qualitySleepByDate = document.getElementById('qualitySleepByDate')
+const hypersomnia = document.getElementById('hypersomnia')
+
+
 
 const userInfo = document.getElementById('userInfo');
 const userName = document.getElementById('userName');
@@ -72,7 +75,7 @@ function renderUser() {
   averageAllSleep.innerText = repository.getAverageAllSleep();
   avgHrsSleptPerday.innerText = displayUser.getAvgSleepInfo(sleepData, 'hoursSlept')
   avgQualitySleep.innerText = displayUser.getAvgSleepInfo(sleepData, 'sleepQuality')
-
+  
   if (filterDate) {
     fluidOuncesDateHeader.innerText = `Fluid Ounces on ${getShortDate(filterDate)} :`;
     userDateFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData, getShortDate(filterDate));
@@ -80,6 +83,7 @@ function renderUser() {
     hrsSleptByDate.innerText = displayUser.getSleepInfoByDate(sleepData, getShortDate(filterDate), 'hoursSlept');
     qualitySleepByDateHeader.innerText = `Quality Sleep on ${getShortDate(filterDate)} :`;
     qualitySleepByDate.innerText = displayUser.getSleepInfoByDate(sleepData, getShortDate(filterDate), 'sleepQuality');
+    hypersomnia.innerText = displayUser.findHpyersomnia(getShortDate(filterDate));
     
   } else if (filterWeek) {
     fluidOuncesWeekHeader.innerText = `Average Fluid Ounces on week of ${getShortDate(filterWeek[0])} :`;
@@ -93,6 +97,7 @@ function renderUser() {
   })
   table += "</table>";
   lastSevenDays.innerHTML = table;
+
 }
 
 

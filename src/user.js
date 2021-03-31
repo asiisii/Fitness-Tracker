@@ -41,6 +41,19 @@ class User {
     return userSleepData.filter(day => day.date === date)[0][sleepType]
   }
 
+  findHpyersomnia(day) {
+    let userSleepData = sleepData.filter(user => user.date === day)
+    let getHrs = userSleepData.map(user => user.hoursSlept)
+    // console.log('getHrs', getHrs);
+    let highestHrs = getHrs.sort((a, b) => b - a)[0];
+    // console.log('highestHrs');
+    let idOfSomnia = userSleepData.filter(user => user.hoursSlept === highestHrs)[0].userID
+    // console.log(idOfSomnia);
+    let somniaName = userData.filter(user => user.id === idOfSomnia)[0].name
+    console.log(somniaName);
+    return somniaName
+  }
+
 }
 
 
