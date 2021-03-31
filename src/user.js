@@ -30,12 +30,17 @@ class User {
     return hydration.map(data => data.numOunces).reduce((total, current) => total + current) / hydration.length;
   }
 
-  getAvgSleepInfo(sleepData, id, sleepType) {
-    let userSleepData = sleepData.filter(user => user.userID === id);
+  getAvgSleepInfo(sleepData, sleepType) {
+    let userSleepData = sleepData.filter(user => user.userID === this.id);
     let sleptHrs = userSleepData.map(hour => hour[sleepType]);
-    let totalHrs = sleptHrs.reduce((total, time) => total += time); 
-    // console.log(totalHrs / userSleepData.length);
-    return totalHrs / userSleepData.length;
+    return sleptHrs.reduce((total, time) => total += time) / userSleepData.length; 
+  }
+
+  getHrsSleptPerDay(sleepData, date) {
+    let userSleepData = sleepData.filter(user => user.userID === this.id);
+    let sleptDates = userSleepData.filter(day => day.date === date)
+    console.log(sleptDates[0].hoursSlept);
+    return sleptDates[0].hoursSlept;
   }
 }
 
