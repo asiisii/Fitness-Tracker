@@ -66,8 +66,9 @@ function renderUser() {
   userGoal.innerText = displayUser.dailyStepGoal;
   userFriends.innerText = displayUser.friends.map(friendID => repository.getUserData(friendID).getFirstName()).join(", ");
   averageAllSleep.innerText = repository.getAverageAllSleep();
-  avgHrsSleptPerday.innerText = displayUser.getAvgHrsSleptPerDay(sleepData, 1)
-  
+  avgHrsSleptPerday.innerText = displayUser.getAvgSleepInfo(sleepData, 1, 'hoursSlept')
+  avgQualitySleep.innerText = displayUser.getAvgSleepInfo(sleepData, 1, 'sleepQuality')
+
   if (filterDate) {
     fluidOuncesDateHeader.innerText = `Fluid Ounces on ${getShortDate(filterDate)} :`;
     userDateFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData, getShortDate(filterDate));
