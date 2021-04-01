@@ -56,6 +56,10 @@ class User {
     return somniaName;
   }
 
+  getActiveMins(activityData, activityType, date) {
+    return this.getAverageData(activityData, activityType, date);
+  }
+
 }
 
 
