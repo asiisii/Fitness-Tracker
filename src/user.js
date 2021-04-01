@@ -14,7 +14,11 @@ class User {
   }
 
   getAverageData (dataArray, targetData, date) {
-    let filteredArray = dataArray.filter(data => data.userID === this.id);
+    let filteredArray = dataArray.filter(data => {
+      // console.log(this.id);
+      return data.userID === this.id
+    })
+    
     if (typeof date === "string") {
       filteredArray = filteredArray.filter(data => data.date === date);
       if (!filteredArray.length) {
@@ -27,6 +31,7 @@ class User {
         return 0;
       }
     }
+    
     return filteredArray.map(data => data[targetData]).reduce((total, current) => total + current) / filteredArray.length;
   }
 
@@ -38,18 +43,15 @@ class User {
     return this.getAverageData(sleepData, sleepType, date);
   }
 
-  getHypersomnia(day) {
+  getHypersomnia(sleepData, userData, day) {
     let userSleepData = sleepData.filter(user => user.date === day);
     let getHrs = userSleepData.map(user => user.hoursSlept);
-    // console.log('getHrs', getHrs);
     let highestHrs = getHrs.sort((a, b) => b - a)[0];
-    // console.log('highestHrs');
     let filteredUsersSleepData = userSleepData.filter(user => user.hoursSlept === highestHrs);
-    if(!filteredUsersSleepData.length) {
+    if (!filteredUsersSleepData.length) {
       return
     }
     let idOfSomnia = filteredUsersSleepData[0].userID;
-    // console.log(idOfSomnia);
     let somniaName = userData.filter(user => user.id === idOfSomnia)[0].name;
     return somniaName;
   }

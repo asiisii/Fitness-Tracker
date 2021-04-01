@@ -102,7 +102,7 @@ function renderUser() {
     hrsSleptByDate.innerText = displayUser.getSleepInfo(sleepData, 'hoursSlept', getShortDate(filterDate));
     qualitySleepByDateHeader.innerText = `Quality Sleep on ${getShortDate(filterDate)} :`;
     qualitySleepByDate.innerText = displayUser.getSleepInfo(sleepData, 'sleepQuality', getShortDate(filterDate));
-    hypersomnia.innerText = displayUser.getHypersomnia(getShortDate(filterDate)) || "No sleep data for any users on this day.";
+    hypersomnia.innerText = displayUser.getHypersomnia(sleepData, userData, getShortDate(filterDate)) || "No sleep data for any users on this day.";
 
   } else if (filterWeek) {
     fluidOuncesWeekHeader.innerText = `Average Fluid Ounces on week of ${getShortDate(filterWeek[0])} :`;

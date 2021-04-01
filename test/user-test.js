@@ -4,7 +4,7 @@ const expect = chai.expect
 const User = require('../src/user.js')
 
 describe('User', () => {
-  let userData, user1, user2
+  let userData, hydrationData, sleepData, user, user1, user2
 
   beforeEach(() => {
     hydrationData = [
@@ -12,6 +12,25 @@ describe('User', () => {
         "userID": 1,
         "date": "2019/06/15",
         "numOunces": 37
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/15",
+        "numOunces": 75
+      }
+    ]
+    sleepData = [
+      {
+        "userID": 1,
+        "date": "2019/06/15",
+        "hoursSlept": 6.1,
+        "sleepQuality": 2.2
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/15",
+        "hoursSlept": 7,
+        "sleepQuality": 4.7
       }
     ]
     userData = [
@@ -34,6 +53,7 @@ describe('User', () => {
         "friends": [ 9, 18, 24, 19 ]
       },
     ]
+    user = new User(userData)
     user1 = new User(userData[0])
     user2 = new User(userData[1])
   })
@@ -87,8 +107,24 @@ describe('User', () => {
   })
 
   it('should return a users average fluid ounces', () => {
-    expect(user1.getAverageFluidOunces(hydrationData, "2019/06/15")).to.deep.equal(37);
+    // expect(user1.getAverageFluidOunces(hydrationData, "2019/06/15")).to.deep.equal(37);
+    expect(user.getAverageFluidOunces(hydrationData, "2019/06/15")).to.deep.equal(56);
   })
+
+  it('should return a users slept hrs', () => {
+    expect(user1.getSleepInfo(sleepData, "hoursSlept", "2019/06/15")).to.equal(6.1);
+    expect(user2.getSleepInfo(sleepData, "hoursSlept", "2019/06/15")).to.equal(7);
+  })
+
+  it('should return a users quality sleep', () => {
+    expect(user1.getSleepInfo(sleepData, "sleepQuality", "2019/06/15")).to.equal(2.2);
+    expect(user2.getSleepInfo(sleepData, "sleepQuality", "2019/06/15")).to.equal(4.7);
+  })
+
+  it('should return a user who slept the most', () => {
+    expect(user.getHypersomnia(sleepData, userData, "2019/06/15")).to.equal('Jarvis Considine')
+  })
+
 
 
 })

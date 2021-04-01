@@ -5,7 +5,7 @@ const UserRepository = require('../src/userRepository')
 const User = require('../src/user')
 
 describe('User Repository', () => {
-  let userData, userRepository, userInfo
+  let sleepData, userData, userRepository
 
   beforeEach(() => {
     sleepData = [
@@ -14,6 +14,12 @@ describe('User Repository', () => {
         "date": "2019/06/15",
         "hoursSlept": 6.1,
         "sleepQuality": 2.2
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/15",
+        "hoursSlept": 7,
+        "sleepQuality": 4.7
       }
     ]
     userData = [
@@ -61,7 +67,9 @@ describe('User Repository', () => {
   })
 
   it('should produce an average sleep among all users', () => {
-    expect(userRepository.getAverageAllSleep()).to.deep.equal(6.1)
+    expect(userRepository.getAverageAllSleep(sleepData)).to.deep.equal(3.45)
   })
+
+  
 
 })
