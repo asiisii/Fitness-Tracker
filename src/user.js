@@ -35,19 +35,23 @@ class User {
   }
 
   getSleepInfo(sleepData, sleepType, date) {
-    return this.getAverageData(sleepData, sleepType, date)
+    return this.getAverageData(sleepData, sleepType, date);
   }
 
   getHypersomnia(day) {
-    let userSleepData = sleepData.filter(user => user.date === day)
-    let getHrs = userSleepData.map(user => user.hoursSlept)
+    let userSleepData = sleepData.filter(user => user.date === day);
+    let getHrs = userSleepData.map(user => user.hoursSlept);
     // console.log('getHrs', getHrs);
     let highestHrs = getHrs.sort((a, b) => b - a)[0];
     // console.log('highestHrs');
-    let idOfSomnia = userSleepData.filter(user => user.hoursSlept === highestHrs)[0].userID
+    let filteredUsersSleepData = userSleepData.filter(user => user.hoursSlept === highestHrs);
+    if(!filteredUsersSleepData.length) {
+      return
+    }
+    let idOfSomnia = filteredUsersSleepData[0].userID;
     // console.log(idOfSomnia);
-    let somniaName = userData.filter(user => user.id === idOfSomnia)[0].name
-    return somniaName
+    let somniaName = userData.filter(user => user.id === idOfSomnia)[0].name;
+    return somniaName;
   }
 
 }

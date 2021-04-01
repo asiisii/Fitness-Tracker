@@ -17,6 +17,8 @@ const lastSevenSleepDaysHeader = document.getElementById('lastSevenSleepDaysHead
 const lastSevenSLeepDays = document.getElementById('lastSevenSleepDays');
 const lastSevenSleepQualityDaysHeader = document.getElementById('lastSevenSleepQualityDaysHeader');
 const lastSevenSleepQUalityDays = document.getElementById('lastSevenQualityDays');
+const lastSevenDaysBestSleepsHeader = document.getElementById('lastSevenDaysBestSleepsHeader');
+const lastSevenDaysBestSleeps = document.getElementById('lastSevenDaysBestSleeps');
 
 const avgHrsSleptPerday = document.getElementById('avgHrsSleptPerday')
 const avgQualitySleep = document.getElementById('avgQualitySleep')
@@ -75,6 +77,9 @@ function generateTableForChosenSevenDays(parentElement, getData, data, target, d
   parentElement.innerHTML = table;
 }
 
+function generateBestSleepUserForChosenSevenDays() {
+
+}
 
 //Renders the inner text of the table that stores all the user info.
 
@@ -97,7 +102,7 @@ function renderUser() {
     hrsSleptByDate.innerText = displayUser.getSleepInfo(sleepData, 'hoursSlept', getShortDate(filterDate));
     qualitySleepByDateHeader.innerText = `Quality Sleep on ${getShortDate(filterDate)} :`;
     qualitySleepByDate.innerText = displayUser.getSleepInfo(sleepData, 'sleepQuality', getShortDate(filterDate));
-    hypersomnia.innerText = displayUser.getHypersomnia(getShortDate(filterDate));
+    hypersomnia.innerText = displayUser.getHypersomnia(getShortDate(filterDate)) || "No sleep data for any users on this day.";
 
   } else if (filterWeek) {
     fluidOuncesWeekHeader.innerText = `Average Fluid Ounces on week of ${getShortDate(filterWeek[0])} :`;
@@ -111,6 +116,7 @@ function renderUser() {
   generateTableForChosenSevenDays(lastSevenWaterDays, displayUser.getAverageData.bind(displayUser), hydrationData, "numOunces", filterWeek);
   generateTableForChosenSevenDays(lastSevenSleepDays, displayUser.getAverageData.bind(displayUser), sleepData, "hoursSlept", filterWeek);
   generateTableForChosenSevenDays(lastSevenSleepQualityDays, displayUser.getAverageData.bind(displayUser), sleepData, "sleepQuality", filterWeek);
+  lastSevenDaysBestSleeps.innerText =  repository.getArrayOfBestSleepersForSevenDays((filterWeek || []).map(date => getShortDate(date)), sleepData).join(" ");
 
 }
 
