@@ -4,7 +4,7 @@ const expect = chai.expect
 const User = require('../src/user.js')
 
 describe('User', () => {
-  let userData, hydrationData, sleepData, user, user1, user2
+  let userData, hydrationData, sleepData, activityData, user, user1, user2
 
   beforeEach(() => {
     hydrationData = [
@@ -31,6 +31,22 @@ describe('User', () => {
         "date": "2019/06/15",
         "hoursSlept": 7,
         "sleepQuality": 4.7
+      }
+    ]
+    activityData = [
+      {
+        "userID": 1,
+        "date": "2019/06/15",
+        "numSteps": 3577,
+        "minutesActive": 140,
+        "flightsOfStairs": 16
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/15",
+        "numSteps": 4294,
+        "minutesActive": 138,
+        "flightsOfStairs": 10
       }
     ]
     userData = [
@@ -125,6 +141,9 @@ describe('User', () => {
     expect(user.getHypersomnia(sleepData, userData, "2019/06/15")).to.equal('Jarvis Considine')
   })
 
-
+  it('should return a users active mins', () => {
+    expect(user1.getSleepInfo(activityData, "minutesActive", "2019/06/15")).to.equal(140);
+    expect(user2.getSleepInfo(activityData, "minutesActive", "2019/06/15")).to.equal(138);
+  })
 
 })
