@@ -130,7 +130,7 @@ function renderUser() {
   generateTableForChosenSevenDays(lastSevenSleepQualityDays, displayUser.getAverageData.bind(displayUser), sleepData, "sleepQuality", filterWeek);
   lastSevenDaysBestSleeps.innerText =  repository.getArrayOfBestSleepersForSevenDays((filterWeek || []).map(date => getShortDate(date)), sleepData).join(" ");
 
-  // generateTableForChosenSevenDays(getActiveMinsOnWeek, displayUser.getAverageData.bind(displayUser), activityData, "minutesActive", filterWeek)
+  generateTableForChosenSevenDays(getActiveMinsOnWeek, displayUser.getAverageData.bind(displayUser), activityData, "minutesActive", filterWeek)
 }
 
 
