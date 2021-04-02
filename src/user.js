@@ -56,10 +56,28 @@ class User {
     return somniaName;
   }
 
+  getStepsByDate(activityData, userData, date, id) {
+   const userStride = userData[id - 1].strideLength
+  //  console.log(userStride);
+    const userSteps = this.getAverageData(activityData, 'numSteps', date);
+    let inMile = Math.ceil((userStride * userSteps) / 5280)
+    return inMile
+  }
+
   getActiveMins(activityData, activityType, date) {
     return this.getAverageData(activityData, activityType, date);
   }
 
+  // checkSteps(userData, activityData, dailyStepGoal, date, id) {
+  //   let totalWalked = Number(this.getStepsByDate(activityData, userData, date, id )) * 5280;
+  //   let theirStepGoal = this.getAverageData(userData, dailyStepGoal, date);
+  //   let remainingSteps = theirStepGoal - totalWalked;
+  //   if (totalWalked >= theirStepGoal) {
+  //     return 'Reached the daily step goal'
+  //   } else {
+  //     return `You still got ${remainingSteps} steps left`;
+  //   }
+  // }
 }
 
 
