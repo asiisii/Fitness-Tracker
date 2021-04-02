@@ -41,6 +41,12 @@ class UserRepository {
     return weeklyUserAverageSleep.filter(user => user.averageSleepForWeek > 3).map(user => this.getUserData(Number(user.userID)).name)
   }
 
+  getAvgActivityInfo(activityData, activityType, date) {
+    const activityOnDate = activityData.filter(data => data.date === date)
+    const acivityList = activityOnDate.map(user => user[activityType])
+    return acivityList.reduce((total, activity) => total += activity) / acivityList.length
+  }
+
 }
 
 if (typeof module !== 'undefined') {
