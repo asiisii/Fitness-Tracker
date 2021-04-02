@@ -69,7 +69,7 @@ class User {
   }
 
   checkSteps(userData, activityData, dailyStepGoal, date, id) {
-    let totalWalked = this.getStepsByDate(activityData, userData, date, id ) * 5280;
+    let totalWalked = Number(this.getStepsByDate(activityData, userData, date, id )) * 5280;
     let theirStepGoal = this.getAverageData(userData, dailyStepGoal, date);
     let remainingSteps = theirStepGoal - totalWalked;
     if (totalWalked >= theirStepGoal) {
