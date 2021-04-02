@@ -68,16 +68,16 @@ class User {
     return this.getAverageData(activityData, activityType, date);
   }
 
-  // checkSteps(userData, activityData, dailyStepGoal, date, id) {
-  //   let totalWalked = Number(this.getStepsByDate(activityData, userData, date, id )) * 5280;
-  //   let theirStepGoal = this.getAverageData(userData, dailyStepGoal, date);
-  //   let remainingSteps = theirStepGoal - totalWalked;
-  //   if (totalWalked >= theirStepGoal) {
-  //     return 'Reached the daily step goal'
-  //   } else {
-  //     return `You still got ${remainingSteps} steps left`;
-  //   }
-  // }
+  checkSteps(userData, activityData, dailyStepGoal, date, id) {
+    let totalWalked = this.getStepsByDate(activityData, userData, date, id ) * 5280;
+    let theirStepGoal = this.getAverageData(userData, dailyStepGoal, date);
+    let remainingSteps = theirStepGoal - totalWalked;
+    if (totalWalked >= theirStepGoal) {
+      return 'Reached the daily step goal'
+    } else {
+      return `You still got ${remainingSteps} steps left`;
+    }
+  }
 }
 
 
