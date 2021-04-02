@@ -69,6 +69,7 @@ describe('User', () => {
         "friends": [ 9, 18, 24, 19 ]
       },
     ]
+    const displayUser = 1
     user = new User(userData)
     user1 = new User(userData[0])
     user2 = new User(userData[1])
@@ -141,6 +142,10 @@ describe('User', () => {
     expect(user.getHypersomnia(sleepData, userData, "2019/06/15")).to.equal('Jarvis Considine')
   })
 
+  it.only('should return a users active mins', () => {
+    expect(user1.getStepsByDate(activityData, userData, "2019/06/15", 1)).to.equal(3);
+  })
+  
   it('should return a users active mins', () => {
     expect(user1.getSleepInfo(activityData, "minutesActive", "2019/06/15")).to.equal(140);
     expect(user2.getSleepInfo(activityData, "minutesActive", "2019/06/15")).to.equal(138);
