@@ -28,6 +28,20 @@ const qualitySleepByDateHeader = document.getElementById('qualitySleepByDateHead
 const qualitySleepByDate = document.getElementById('qualitySleepByDate')
 const hypersomnia = document.getElementById('hypersomnia')
 
+const getActiveMinsOnDayHeader = document.getElementById('getActiveMinsOnDayHeader')
+const getActiveMinsOnDay = document.getElementById('getActiveMinsOnDay')
+const getActiveMinsOnWeekHeader = document.getElementById('getActiveMinsOnWeekHeader')
+const getActiveMinsOnWeek = document.getElementById('getActiveMinsOnWeek')
+const checkStepGoal = document.getElementById('checkStepGoal')
+const StepGoalExceedDays = document.getElementById('StepGoalExceedDays')
+const stairClimbed = document.getElementById('stairClimbed')
+const allUserAvgStairsClimbed = document.getElementById('allUserAvgStairsClimbed')
+const allUserAvgStepsTaken = document.getElementById('allUserAvgStepsTaken')
+const allUserAvgMinsActive = document.getElementById('allUserAvgMinsActive')
+const lastestDayStepsInfo = document.getElementById('lastestDayStepsInfo')
+const lastestDayActiveInfo = document.getElementById('lastestDayActiveInfo')
+const lastestDistanceWalked = document.getElementById('lastestDistanceWalked')
+
 const userInfo = document.getElementById('userInfo');
 const userName = document.getElementById('userName');
 const userAddress = document.getElementById('userAddress');
@@ -44,6 +58,9 @@ let filterWeek = null;
 let filterDate = null;
 let displayUser = repository.getUserData(1);
 
+// const avgNumSteps = displayUser.getAvgLatestDayInfoForAllUsers(activityData, 'numSteps')
+// const avgMinutesActive = displayUser.getAvgLatestDayInfoForAllUsers(activityData, 'minutesActive')
+// const avgFlightsOfStairs = displayUser.getAvgLatestDayInfoForAllUsers(activityData, 'flightsOfStairs')
 //EventListeners
 
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -64,6 +81,7 @@ week.addEventListener('change', (event) => {
   filterDate = null;
   renderUser();
   week.value = getWeek(new Date());
+  // console.log(week.value);
 })
 
 //Functions
@@ -77,11 +95,9 @@ function generateTableForChosenSevenDays(parentElement, getData, data, target, d
   parentElement.innerHTML = table;
 }
 
-function generateBestSleepUserForChosenSevenDays() {
-
-}
 
 //Renders the inner text of the table that stores all the user info.
+
 
 function renderUser() {
   welcome.innerText = `Welcome ${displayUser.getFirstName()}!`
@@ -91,9 +107,13 @@ function renderUser() {
   userStride.innerText = displayUser.strideLength;
   userGoal.innerText = displayUser.dailyStepGoal;
   userFriends.innerText = displayUser.friends.map(friendID => repository.getUserData(friendID).getFirstName()).join(", ");
-  averageAllSleep.innerText = repository.getAverageAllSleep();
+  averageAllSleep.innerText = repository.getAverageAllSleep(sleepData);
   avgHrsSleptPerday.innerText = displayUser.getSleepInfo(sleepData, 'hoursSlept')
   avgQualitySleep.innerText = displayUser.getSleepInfo(sleepData, 'sleepQuality')
+  stairClimbed.innerText = displayUser.getTotalStairsClimbed(activityData);
+  lastestDayStepsInfo.innerText = displayUser.getLatestDayInfo(activityData, 'numSteps');
+  lastestDayActiveInfo.innerText = displayUser.getLatestDayInfo(activityData, 'minutesActive');
+  lastestDistanceWalked.innerText = (((displayUser.getLatestDayInfo(activityData, 'numSteps')) * displayUser.strideLength) / 5280).toFixed(2)
 
   if (filterDate) {
     fluidOuncesDateHeader.innerText = `Fluid Ounces on ${getShortDate(filterDate)} :`;
@@ -102,13 +122,24 @@ function renderUser() {
     hrsSleptByDate.innerText = displayUser.getSleepInfo(sleepData, 'hoursSlept', getShortDate(filterDate));
     qualitySleepByDateHeader.innerText = `Quality Sleep on ${getShortDate(filterDate)} :`;
     qualitySleepByDate.innerText = displayUser.getSleepInfo(sleepData, 'sleepQuality', getShortDate(filterDate));
-    hypersomnia.innerText = displayUser.getHypersomnia(getShortDate(filterDate)) || "No sleep data for any users on this day.";
+    hypersomnia.innerText = displayUser.getHypersomnia(sleepData, userData, getShortDate(filterDate)) || "No sleep data for any users on this day.";
+
+    getActiveMinsOnDayHeader.innerText = `Minutes Active On ${getShortDate(filterDate)} :`;
+    getActiveMinsOnDay.innerText = displayUser.getActiveMins(activityData, 'minutesActive', getShortDate(filterDate))
+    checkStepGoal.innerText = displayUser.checkSteps(userData, activityData, 'dailyStepGoal', getShortDate(filterDate), displayUser.id)
+    allUserAvgStairsClimbed.innerText = repository.getAvgActivityInfo(activityData, 'flightsOfStairs', getShortDate(filterDate))
+    allUserAvgStepsTaken.innerText = repository.getAvgActivityInfo(activityData, 'numSteps', getShortDate(filterDate))
+    allUserAvgMinsActive.innerText = repository.getAvgActivityInfo(activityData, 'minutesActive', getShortDate(filterDate))
 
   } else if (filterWeek) {
     fluidOuncesWeekHeader.innerText = `Average Fluid Ounces on week of ${getShortDate(filterWeek[0])} :`;
+    console.log(filterWeek.map(date => getShortDate(date)));
     userAverageWeekFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData, filterWeek.map(date => getShortDate(date)));
     hrsSleptAcrossSevenDaysHeader.innerText = `Average Sleep Hours on week of ${getShortDate(filterWeek[0])} :`;
     hrsSleptAcrossSevenDays.innerText = displayUser.getSleepInfo(sleepData, "hoursSlept", filterWeek.map(date => getShortDate(date)));
+    
+    getActiveMinsOnWeekHeader.innerText = `Minutes Active on week of ${getShortDate(filterWeek[0])} :`;
+   
   } else {
     userAverageFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData);
   }
@@ -118,6 +149,6 @@ function renderUser() {
   generateTableForChosenSevenDays(lastSevenSleepQualityDays, displayUser.getAverageData.bind(displayUser), sleepData, "sleepQuality", filterWeek);
   lastSevenDaysBestSleeps.innerText =  repository.getArrayOfBestSleepersForSevenDays((filterWeek || []).map(date => getShortDate(date)), sleepData).join(" ");
 
+  generateTableForChosenSevenDays(getActiveMinsOnWeek, displayUser.getAverageData.bind(displayUser), activityData, "minutesActive", filterWeek)
 }
-
 

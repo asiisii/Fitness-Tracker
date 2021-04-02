@@ -14,7 +14,8 @@ class User {
   }
 
   getAverageData (dataArray, targetData, date) {
-    let filteredArray = dataArray.filter(data => data.userID === this.id);
+    let filteredArray = dataArray.filter(data => data.userID === this.id)
+    
     if (typeof date === "string") {
       filteredArray = filteredArray.filter(data => data.date === date);
       if (!filteredArray.length) {
@@ -27,6 +28,7 @@ class User {
         return 0;
       }
     }
+    
     return filteredArray.map(data => data[targetData]).reduce((total, current) => total + current) / filteredArray.length;
   }
 
@@ -38,21 +40,68 @@ class User {
     return this.getAverageData(sleepData, sleepType, date);
   }
 
-  getHypersomnia(day) {
+  getHypersomnia(sleepData, userData, day) {
     let userSleepData = sleepData.filter(user => user.date === day);
     let getHrs = userSleepData.map(user => user.hoursSlept);
-    // console.log('getHrs', getHrs);
     let highestHrs = getHrs.sort((a, b) => b - a)[0];
-    // console.log('highestHrs');
     let filteredUsersSleepData = userSleepData.filter(user => user.hoursSlept === highestHrs);
-    if(!filteredUsersSleepData.length) {
+    if (!filteredUsersSleepData.length) {
       return
     }
     let idOfSomnia = filteredUsersSleepData[0].userID;
-    // console.log(idOfSomnia);
     let somniaName = userData.filter(user => user.id === idOfSomnia)[0].name;
     return somniaName;
   }
+
+  getStepsByDate(activityData, userData, date, id) {
+    const userStride = userData[id - 1].strideLength
+    const userSteps = this.getAverageData(activityData, 'numSteps', date);
+    let inMile = ((userStride * userSteps) / 5280).toFixed(2)
+    return inMile
+  }
+
+  getActiveMins(activityData, activityType, date) {
+    return this.getAverageData(activityData, activityType, date);
+  }
+
+  checkSteps(userData, activityData, dailyStepGoal, date, id) {
+    let totalWalked = Number(this.getStepsByDate(activityData, userData, date, id )) * 5280;
+    let theirStepGoal = this.getAverageData(userData, dailyStepGoal, date);
+    let remainingSteps = theirStepGoal - totalWalked;
+    if (totalWalked >= theirStepGoal) {
+      return 'Reached the daily step goal'
+    } else {
+      return `You still got ${remainingSteps} steps left`;
+    }
+  }
+
+  // getStepGoalExceededDays(userData, activityData, dailyStepGoal, date, id) {
+  //   const exceededDays = [];
+    
+  // }
+
+  getTotalStairsClimbed(activityData) {
+    let filteredArray = activityData.filter(data => data.userID === this.id)
+    let stairsClimbed = filteredArray.map(stairs => stairs.flightsOfStairs)
+    let climbingRecord = stairsClimbed.sort((a, b) => b - a)[0]
+    return climbingRecord
+  }
+
+  getLatestDayInfo(activityData, activityType) {
+    let filteredArray = activityData.filter(data => data.userID === this.id)
+    let activityList = filteredArray.map(stairs => stairs[activityType])
+    // let dateArray = filteredArray.map(stairs => stairs.date)
+    // const latestDay = dateArray[dateArray.length - 1]
+    const latestInfo = activityList[activityList.length - 1]
+    return latestInfo
+  }
+
+  // getAvgLatestDayInfoForAllUsers(activityData, activityType) {
+  //   const latestDay = activityData.map(user => user.date)[activityData.length - 1]
+  //   const latestDayInfoList = activityData.filter(dates => dates.date === latestDay)
+  //   const activity = latestDayInfoList.map(theActivity => theActivity[activityType])
+  //   return (activity.reduce((total, stairs) => total += stairs)) / activity.length
+  // }
 
 }
 
