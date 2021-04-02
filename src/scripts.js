@@ -111,7 +111,7 @@ function renderUser() {
 
     getActiveMinsOnDayHeader.innerText = `Minutes Active On ${getShortDate(filterDate)} :`;
     getActiveMinsOnDay.innerText = displayUser.getActiveMins(activityData, 'minutesActive', getShortDate(filterDate))
-    // checkStepGoal.innerText = displayUser.checkSteps(userData, activityData, 'dailyStepGoal', getShortDate(filterDate), displayUser.id)
+    checkStepGoal.innerText = displayUser.checkSteps(userData, activityData, 'dailyStepGoal', getShortDate(filterDate), displayUser.id)
   } else if (filterWeek) {
     fluidOuncesWeekHeader.innerText = `Average Fluid Ounces on week of ${getShortDate(filterWeek[0])} :`;
     console.log(filterWeek.map(date => getShortDate(date)));
