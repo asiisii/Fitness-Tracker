@@ -87,14 +87,14 @@ class User {
     return climbingRecord
   }
 
-  // getLatestDayInfo(activityData, activityType) {
-  //   let filteredArray = activityData.filter(data => data.userID === this.id)
-  //   let activityList = filteredArray.map(stairs => stairs[activityType])
-  //   // let dateArray = filteredArray.map(stairs => stairs.date)
-  //   // const latestDay = dateArray[dateArray.length - 1]
-  //   const latestInfo = activityList[activityList.length - 1]
-  //   return latestInfo
-  // }
+  getLatestDayInfo(activityData, activityType) {
+    let filteredArray = activityData.filter(data => data.userID === this.id)
+    let activityList = filteredArray.map(stairs => stairs[activityType])
+    // let dateArray = filteredArray.map(stairs => stairs.date)
+    // const latestDay = dateArray[dateArray.length - 1]
+    const latestInfo = activityList[activityList.length - 1]
+    return latestInfo
+  }
 
   // getAvgLatestDayInfoForAllUsers(activityData, activityType) {
   //   const latestDay = activityData.map(user => user.date)[activityData.length - 1]
