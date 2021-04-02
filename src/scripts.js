@@ -33,7 +33,14 @@ const getActiveMinsOnDay = document.getElementById('getActiveMinsOnDay')
 const getActiveMinsOnWeekHeader = document.getElementById('getActiveMinsOnWeekHeader')
 const getActiveMinsOnWeek = document.getElementById('getActiveMinsOnWeek')
 const checkStepGoal = document.getElementById('checkStepGoal')
-
+const StepGoalExceedDays = document.getElementById('StepGoalExceedDays')
+const stairClimbed = document.getElementById('stairClimbed')
+const allUserAvgStairsClimbed = document.getElementById('allUserAvgStairsClimbed')
+const allUserAvgStepsTaken = document.getElementById('allUserAvgStepsTaken')
+const allUserAvgMinsActive = document.getElementById('allUserAvgMinsActive')
+const lastestDayStepsInfo = document.getElementById('lastestDayStepsInfo')
+const lastestDayActiveInfo = document.getElementById('lastestDayActiveInfo')
+const lastestDistanceWalked = document.getElementById('lastestDistanceWalked')
 
 const userInfo = document.getElementById('userInfo');
 const userName = document.getElementById('userName');
@@ -51,6 +58,9 @@ let filterWeek = null;
 let filterDate = null;
 let displayUser = repository.getUserData(1);
 
+// const avgNumSteps = displayUser.getAvgLatestDayInfoForAllUsers(activityData, 'numSteps')
+// const avgMinutesActive = displayUser.getAvgLatestDayInfoForAllUsers(activityData, 'minutesActive')
+// const avgFlightsOfStairs = displayUser.getAvgLatestDayInfoForAllUsers(activityData, 'flightsOfStairs')
 //EventListeners
 
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -88,6 +98,7 @@ function generateTableForChosenSevenDays(parentElement, getData, data, target, d
 
 //Renders the inner text of the table that stores all the user info.
 
+
 function renderUser() {
   welcome.innerText = `Welcome ${displayUser.getFirstName()}!`
   userName.innerText = displayUser.name;
@@ -99,6 +110,10 @@ function renderUser() {
   averageAllSleep.innerText = repository.getAverageAllSleep(sleepData);
   avgHrsSleptPerday.innerText = displayUser.getSleepInfo(sleepData, 'hoursSlept')
   avgQualitySleep.innerText = displayUser.getSleepInfo(sleepData, 'sleepQuality')
+  stairClimbed.innerText = displayUser.getTotalStairsClimbed(activityData);
+  lastestDayStepsInfo.innerText = displayUser.getLatestDayInfo(activityData, 'numSteps');
+  lastestDayActiveInfo.innerText = displayUser.getLatestDayInfo(activityData, 'minutesActive');
+  lastestDistanceWalked.innerText = (((displayUser.getLatestDayInfo(activityData, 'numSteps')) * displayUser.strideLength) / 5280).toFixed(2)
 
   if (filterDate) {
     fluidOuncesDateHeader.innerText = `Fluid Ounces on ${getShortDate(filterDate)} :`;
@@ -112,6 +127,10 @@ function renderUser() {
     getActiveMinsOnDayHeader.innerText = `Minutes Active On ${getShortDate(filterDate)} :`;
     getActiveMinsOnDay.innerText = displayUser.getActiveMins(activityData, 'minutesActive', getShortDate(filterDate))
     checkStepGoal.innerText = displayUser.checkSteps(userData, activityData, 'dailyStepGoal', getShortDate(filterDate), displayUser.id)
+    allUserAvgStairsClimbed.innerText = repository.getAvgActivityInfo(activityData, 'flightsOfStairs', getShortDate(filterDate))
+    allUserAvgStepsTaken.innerText = repository.getAvgActivityInfo(activityData, 'numSteps', getShortDate(filterDate))
+    allUserAvgMinsActive.innerText = repository.getAvgActivityInfo(activityData, 'minutesActive', getShortDate(filterDate))
+
   } else if (filterWeek) {
     fluidOuncesWeekHeader.innerText = `Average Fluid Ounces on week of ${getShortDate(filterWeek[0])} :`;
     console.log(filterWeek.map(date => getShortDate(date)));
@@ -132,5 +151,4 @@ function renderUser() {
 
   generateTableForChosenSevenDays(getActiveMinsOnWeek, displayUser.getAverageData.bind(displayUser), activityData, "minutesActive", filterWeek)
 }
-
 
