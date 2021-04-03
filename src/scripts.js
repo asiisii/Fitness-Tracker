@@ -19,6 +19,8 @@ const lastSevenSleepQualityDaysHeader = document.getElementById('lastSevenSleepQ
 const lastSevenSleepQUalityDays = document.getElementById('lastSevenQualityDays');
 const lastSevenDaysBestSleepsHeader = document.getElementById('lastSevenDaysBestSleepsHeader');
 const lastSevenDaysBestSleeps = document.getElementById('lastSevenDaysBestSleeps');
+const datesStepGoalAchievedHeader = document.getElementById('datesStepGoalAchievedHeader');
+const datesStepGoalAchieved = document.getElementById('datesStepGoalAchieved');
 
 const avgHrsSleptPerday = document.getElementById('avgHrsSleptPerday')
 const avgQualitySleep = document.getElementById('avgQualitySleep')
@@ -137,9 +139,9 @@ function renderUser() {
     userAverageWeekFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData, filterWeek.map(date => getShortDate(date)));
     hrsSleptAcrossSevenDaysHeader.innerText = `Average Sleep Hours on week of ${getShortDate(filterWeek[0])} :`;
     hrsSleptAcrossSevenDays.innerText = displayUser.getSleepInfo(sleepData, "hoursSlept", filterWeek.map(date => getShortDate(date)));
-    
+
     getActiveMinsOnWeekHeader.innerText = `Minutes Active on week of ${getShortDate(filterWeek[0])} :`;
-   
+
   } else {
     userAverageFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData);
   }
@@ -148,7 +150,7 @@ function renderUser() {
   generateTableForChosenSevenDays(lastSevenSleepDays, displayUser.getAverageData.bind(displayUser), sleepData, "hoursSlept", filterWeek);
   generateTableForChosenSevenDays(lastSevenSleepQualityDays, displayUser.getAverageData.bind(displayUser), sleepData, "sleepQuality", filterWeek);
   lastSevenDaysBestSleeps.innerText =  repository.getArrayOfBestSleepersForSevenDays((filterWeek || []).map(date => getShortDate(date)), sleepData).join(" ");
-
+  datesStepGoalAchieved.innerText = repository.getStepGoalDates(displayUser.id, activityData).join(", ");
   generateTableForChosenSevenDays(getActiveMinsOnWeek, displayUser.getAverageData.bind(displayUser), activityData, "minutesActive", filterWeek)
 }
 
