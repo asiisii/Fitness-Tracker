@@ -56,7 +56,7 @@ class User {
   getStepsByDate(activityData, userData, date, id) {
     const userStride = userData[id - 1].strideLength
     const userSteps = this.getAverageData(activityData, 'numSteps', date);
-    let inMile = ((userStride * userSteps) / 5280).toFixed(2)
+    let inMile = parseFloat(((userStride * userSteps) / 5280).toFixed(2))
     return inMile
   }
 
@@ -65,7 +65,7 @@ class User {
   }
 
   checkSteps(userData, activityData, dailyStepGoal, date, id) {
-    let totalWalked = Number(this.getStepsByDate(activityData, userData, date, id )) * 5280;
+    let totalWalked = this.getStepsByDate(activityData, userData, date, id) * 5280;
     let theirStepGoal = this.getAverageData(userData, dailyStepGoal, date);
     let remainingSteps = theirStepGoal - totalWalked;
     if (totalWalked >= theirStepGoal) {

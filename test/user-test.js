@@ -124,8 +124,7 @@ describe('User', () => {
   })
 
   it('should return a users average fluid ounces', () => {
-    // expect(user1.getAverageFluidOunces(hydrationData, "2019/06/15")).to.deep.equal(37);
-    expect(user.getAverageFluidOunces(hydrationData, "2019/06/15")).to.deep.equal(56);
+    expect(user1.getAverageFluidOunces(hydrationData, "2019/06/15")).to.deep.equal(37);
   })
 
   it('should return a users slept hrs', () => {
@@ -142,13 +141,18 @@ describe('User', () => {
     expect(user.getHypersomnia(sleepData, userData, "2019/06/15")).to.equal('Jarvis Considine')
   })
 
-  it.only('should return a users active mins', () => {
-    expect(user1.getStepsByDate(activityData, userData, "2019/06/15", 1)).to.equal(3);
+  it('should return a users active mins', () => {
+    expect(user1.getStepsByDate(activityData, userData, "2019/06/15", 1)).to.equal(2.91);
   })
   
   it('should return a users active mins', () => {
     expect(user1.getSleepInfo(activityData, "minutesActive", "2019/06/15")).to.equal(140);
     expect(user2.getSleepInfo(activityData, "minutesActive", "2019/06/15")).to.equal(138);
+  })
+
+  it('should check if the user reached their daily step goal or not', () => {
+    expect(user.checkSteps(userData, activityData, 'dailyStepGoal', "2019/06/15", 1)).to.equal('Reached the daily step goal');
+    expect(user.checkSteps(userData, activityData, 'dailyStepGoal', "2019/06/15", 2)).to.equal('Reached the daily step goal');
   })
 
 })

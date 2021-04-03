@@ -5,7 +5,7 @@ const UserRepository = require('../src/userRepository')
 const User = require('../src/user')
 
 describe('User Repository', () => {
-  let sleepData, userData, userRepository
+  let sleepData, activityData, userData, usersArray, activityArray, userRepository, userRepository1
 
   beforeEach(() => {
     sleepData = [
@@ -20,6 +20,22 @@ describe('User Repository', () => {
         "date": "2019/06/15",
         "hoursSlept": 7,
         "sleepQuality": 4.7
+      }
+    ]
+    activityData = [
+      {
+        "userID": 1,
+        "date": "2019/06/15",
+        "numSteps": 3577,
+        "minutesActive": 140,
+        "flightsOfStairs": 16
+      },
+      {
+        "userID": 2,
+        "date": "2019/06/15",
+        "numSteps": 4294,
+        "minutesActive": 138,
+        "flightsOfStairs": 10
       }
     ]
     userData = [
@@ -42,8 +58,10 @@ describe('User Repository', () => {
         "friends": [ 9, 18, 24, 19 ]
       },
     ]
-    const usersArray = userData.map(user => new User(user));
+    usersArray = userData.map(user => new User(user));
+    activityArray = activityData.map(user => new User(user));
     userRepository = new UserRepository(usersArray);
+    userRepository1 = new UserRepository(activityArray);
   })
 
   it('should be a function', () => {
@@ -51,15 +69,7 @@ describe('User Repository', () => {
   })
 
   it('should return an object using user ID', () => {
-    expect(userRepository.getUserData(1)).to.deep.equal({
-      "id": 1,
-      "name": "Luisa Hane",
-      "address": "15195 Nakia Tunnel, Erdmanport VA 19901-1697",
-      "email": "Diana.Hayes1@hotmail.com",
-      "strideLength": 4.3,
-      "dailyStepGoal": 10000,
-      "friends": [ 16, 4, 8 ]
-    })
+    expect(userRepository.getUserData(1)).to.deep.equal(userData[0])
   })
 
   it('should produce an average step count', () => {
@@ -70,6 +80,9 @@ describe('User Repository', () => {
     expect(userRepository.getAverageAllSleep(sleepData)).to.deep.equal(3.45)
   })
 
+  // it('should return avg activity info of all users', () => {
+  //   expect(userRepository1.getAvgActivityInfo(activityData, 'numSteps', '2019/06/15').to.equal(3935.5))
+  // })
   
 
 })
