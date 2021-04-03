@@ -11,6 +11,7 @@
       <h2 id="userList" class="user-list"></h2>
       <input type="date" id="date" class="date"/>
       <input type="week" id="week" class="week"/>
+      <select id="userDropbox"></select>
     </header>
     <main id="tracker" class="tracker">
       <section id="userInfo" class="user-info">
@@ -206,6 +207,18 @@
               miles walked for the latest day :
             </th>
             <td id="lastestDistanceWalked"></td>
+          </tr>
+          <tr>
+            <th id="datesStepGoalAchievedHeader">
+              Dates When User Achieved Step Goal :
+            </th>
+            <td id="datesStepGoalAchieved"></td>
+          </tr>
+          <tr>
+            <th id="weeklyActivityTrackHeader">
+              Activity data across selected week :
+            </th>
+            <td id="weeklyActivityTrack"></td>
           </tr>
           <div id="stepGoal" class="stepGoal">
             <canvas id="stepGoalCompare" height="50" ></canvas>
