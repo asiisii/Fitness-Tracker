@@ -142,8 +142,8 @@ describe('User', () => {
     expect(user.getHypersomnia(sleepData, userData, "2019/06/15")).to.equal('Jarvis Considine')
   })
 
-  it.only('should return a users active mins', () => {
-    expect(user1.getStepsByDate(activityData, userData, "2019/06/15", 1)).to.equal(3);
+  it('should return a users active mins', () => {
+    expect(user1.getStepsByDate(activityData, userData, "2019/06/15", 1)).to.equal(2.91);
   })
   
   it('should return a users active mins', () => {
