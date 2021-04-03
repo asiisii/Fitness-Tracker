@@ -15,7 +15,7 @@ class User {
 
   getAverageData (dataArray, targetData, date) {
     let filteredArray = dataArray.filter(data => data.userID === this.id)
-    
+
     if (typeof date === "string") {
       filteredArray = filteredArray.filter(data => data.date === date);
       if (!filteredArray.length) {
@@ -28,7 +28,7 @@ class User {
         return 0;
       }
     }
-    
+
     return filteredArray.map(data => data[targetData]).reduce((total, current) => total + current) / filteredArray.length;
   }
 
@@ -77,7 +77,7 @@ class User {
 
   // getStepGoalExceededDays(userData, activityData, dailyStepGoal, date, id) {
   //   const exceededDays = [];
-    
+
   // }
 
   getTotalStairsClimbed(activityData) {
@@ -102,6 +102,24 @@ class User {
   //   const activity = latestDayInfoList.map(theActivity => theActivity[activityType])
   //   return (activity.reduce((total, stairs) => total += stairs)) / activity.length
   // }
+
+  getStepGoalDates(activityData) {
+    const stepGoal = this.dailyStepGoal;
+    const filterArray = activityData.filter(user => user.userID === this.id);
+    return filterArray.filter(user => user.numSteps > stepGoal).map(user => user.date);
+  }
+
+  getWeeklyActivityData(activityData, dates){
+    return activityData.filter(user => user.userID === this.id && dates.some(date => user.date === date))
+      .map(user => ({
+        date: user.date,
+        numSteps: user.numSteps,
+        minutesActive: user.minutesActive,
+        flightsOfStairs: user.flightsOfStairs,
+      }));
+
+
+  }
 
 }
 

@@ -47,16 +47,6 @@ class UserRepository {
     return acivityList.reduce((total, activity) => total += activity) / acivityList.length
   }
 
-  getStepGoalDates(userID, activityData) {
-    const user = this.users.find(user => userID === user.id);
-    if(!user) {
-      throw new Error("No such user.");
-    }
-    const stepGoal = user.dailyStepGoal;
-    const filterArray = activityData.filter(user => user.userID === userID);
-    return filterArray.filter(user => user.numSteps > stepGoal).map(user => user.date);
-  }
-
 }
 
 if (typeof module !== 'undefined') {
