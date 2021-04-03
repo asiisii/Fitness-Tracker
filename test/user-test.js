@@ -150,4 +150,9 @@ describe('User', () => {
     expect(user2.getSleepInfo(activityData, "minutesActive", "2019/06/15")).to.equal(138);
   })
 
+  it('should check if the user reached their daily step goal or not', () => {
+    expect(user.checkSteps(userData, activityData, 'dailyStepGoal', "2019/06/15", 1)).to.equal('Reached the daily step goal');
+    expect(user.checkSteps(userData, activityData, 'dailyStepGoal', "2019/06/15", 2)).to.equal('Reached the daily step goal');
+  })
+
 })
