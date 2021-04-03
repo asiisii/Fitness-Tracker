@@ -124,8 +124,7 @@ describe('User', () => {
   })
 
   it('should return a users average fluid ounces', () => {
-    // expect(user1.getAverageFluidOunces(hydrationData, "2019/06/15")).to.deep.equal(37);
-    expect(user.getAverageFluidOunces(hydrationData, "2019/06/15")).to.deep.equal(56);
+    expect(user1.getAverageFluidOunces(hydrationData, "2019/06/15")).to.deep.equal(37);
   })
 
   it('should return a users slept hrs', () => {
