@@ -47,7 +47,7 @@ const lastestDayStepsInfo = document.getElementById('lastestDayStepsInfo')
 const lastestDayActiveInfo = document.getElementById('lastestDayActiveInfo')
 const lastestDistanceWalked = document.getElementById('lastestDistanceWalked')
 
-const userInfo = document.getElementById('userInfo');
+// const userInfo = document.getElementById('userInfo');
 const userName = document.getElementById('userName');
 const userAddress = document.getElementById('userAddress');
 const userEmail = document.getElementById('userEmail');
@@ -70,6 +70,7 @@ let displayUser = repository.getUserData(1);
 
 window.addEventListener('DOMContentLoaded', (event) => {
   renderUserList();
+  createCharts();
   renderUser();
   week.value = getWeek(new Date());
   date.value = getDate(new Date());
@@ -78,6 +79,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 date.addEventListener('change', (event) => {
   filterDate = new Date(date.value + ':0:0:0');
   filterWeek = null;
+  createCharts();
   renderUser();
   date.value = getDate(new Date());
 })
@@ -85,6 +87,7 @@ date.addEventListener('change', (event) => {
 week.addEventListener('change', (event) => {
   filterWeek = getDatesOfWeek(getDateForWeek(week.value));
   filterDate = null;
+  createCharts();
   renderUser();
   week.value = getWeek(new Date());
   // console.log(week.value);
@@ -92,6 +95,7 @@ week.addEventListener('change', (event) => {
 
 userDropbox.addEventListener('change', (event) => {
   displayUser = repository.getUserData(Number(userDropbox.value));
+  createCharts();
   renderUser();
 })
 
@@ -118,6 +122,8 @@ function renderUserList() {
 
 
 function renderUser() {
+  
+  // displayUser = repository.getUserData(Number(userDropbox.value));
   welcome.innerText = `Welcome ${displayUser.getFirstName()}!`
   userName.innerText = displayUser.name;
   userAddress.innerText = displayUser.address;
