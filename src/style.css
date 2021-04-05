@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* background-color: #97D4E7; */
+}
+
+header {
+  text-align: center;
+  margin: 2%;
+  border-radius: 1rem;
+}
+
+.welcome{
+  margin: 20px 0;
+  font-size: 4rem;
+}
+
+select, 
+input {
+  margin: 20px 0;
+  background-color: white;
+  font-size: 2rem;
+}
+
+.user-info {
+  margin: 20px auto;
+  padding: 10px;
+  border: 2px solid white;
+  border-radius: 1rem;
+  font-size: 2rem;
+}
+th {
+  text-align: right;
+}
+td {
+  text-align: left;
+  font-style: italic;
+  padding: 5px;
+} 
+/* .step-goal {
+  width: 50%;
+  float: left;
+} */
+
+hr {
+  /* height: 12px; */
+  /* background-color: #353567; */
+  border-bottom: 8px solid #353567;
+  border-radius: 15px;
+  width: 100%;
+  /* margin-top: 3.5px; */
+}
