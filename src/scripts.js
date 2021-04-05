@@ -124,7 +124,7 @@ function renderUserList() {
 function renderUser() {
   
   // displayUser = repository.getUserData(Number(userDropbox.value));
-  welcome.innerText = `Welcome ${displayUser.getFirstName()}!`
+  welcome.innerText = `Welcome, ${displayUser.getFirstName()}!`
   userName.innerText = displayUser.name;
   userAddress.innerText = displayUser.address;
   userEmail.innerText = displayUser.email;
