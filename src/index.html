@@ -11,40 +11,68 @@
       <h1 id="welcome" class="welcome"></h1>
       <input type="date" id="date" class="date"/>
       <input type="week" id="week" class="week"/>
-      <select class="userDropbox" id="userDropbox"></select>
-      <table class="user-info">
-        <tr>
-          <th>Name:</th>
-          <td id="userName"></td>
-        </tr>
-        <tr>
-          <th>Address:</th>
-          <td id="userAddress"></td>
-        </tr>
-        <tr>
-          <th>Email:</th>
-          <td id="userEmail"></td>
-        </tr>
-        <tr>
-          <th>Stride Length:</th>
-          <td id="userStride"></td>
-        </tr>
-        <tr>
-          <th>Step Goal:</th>
-          <td id="userGoal"></td>
-        </tr>
-        <tr>
-          <th>Your Friends:</th>
-          <td id="userFriends"></td>
-        </tr>
-      </table>   
+      <select class="user-dropbox" id="userDropbox"></select>
       <hr>
     </header>
-
     
-    <div id="stepGoal" class="step-goal">
-      <canvas id="stepGoalCompare" width="200" height="90" ></canvas>
+    <section class="select-page">
+      <a href="#about">My Profile</a>
+      <a href="#stats">My Stats</a>
+      <a href="#comparisons">Comparisons</a>
+    </section>
+    
+    <main class="slider">
+      <section class="pages">
+        <div class="about" id="about">
+          <table class="user-info">
+            <tr>
+              <th>Name:</th>
+              <td id="userName"></td>
+            </tr>
+            <tr>
+              <th>Address:</th>
+              <td id="userAddress"></td>
+            </tr>
+            <tr>
+              <th>Email:</th>
+              <td id="userEmail"></td>
+            </tr>
+            <tr>
+              <th>Stride Length:</th>
+              <td id="userStride"></td>
+            </tr>
+            <tr>
+              <th>Step Goal:</th>
+              <td id="userGoal"></td>
+            </tr>
+            <tr>
+              <th>Your Friends:</th>
+              <td id="userFriends"></td>
+            </tr>
+          </table>   
+        </div>
+        <div id="stats">
+          
+        </div>
+        <div id="comparisons">
+          <div id="stepGoal" class="step-goal">
+            <canvas id="stepGoalCompare" width="200" height="90" ></canvas>
+          </div>
+          
+        </div>
+      </section>
+    </main>
+    <div id="stepInfo" class="step-info">
+      <canvas id="stepsCompare" width="400" height="100" ></canvas>
     </div>
+    <div id="minsActiveInfo" class="mins-active-info">
+      <canvas id="minsActiveCompare" width="400" height="100" ></canvas>
+    </div>
+    <div id="stairsClimbedInfo" class="stairs-climbed-info">
+      <canvas id="stairsClimbedCompare" width="400" height="100" ></canvas>
+    </div>
+    
+   
       <table>
         <tr>
          <th id="fluidOuncesHeader">
@@ -214,15 +242,7 @@
           <!-- <div id="stepGoal" class="stepGoal">
             <canvas id="stepGoalCompare" width="400" height="100" ></canvas>
           </div> -->
-          <div id="stepInfo" class="step-info">
-            <canvas id="stepsCompare" width="400" height="100" ></canvas>
-          </div>
-          <div id="minsActiveInfo" class="mins-active-info">
-            <canvas id="minsActiveCompare" width="400" height="100" ></canvas>
-          </div>
-          <div id="stairsClimbedInfo" class="stairs-climbed-info">
-            <canvas id="stairsClimbedCompare" width="400" height="100" ></canvas>
-          </div>
+          
       </table>
       <!-- </div> -->
       <div id="activity" class="activity">
