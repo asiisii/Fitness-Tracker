@@ -136,8 +136,8 @@ function renderUser() {
   myDailyStepGoal.innerText = displayUser.dailyStepGoal
   allUsersAvgStepGoal.innerText = repository.getAverageStep()
   averageAllSleep.innerText = repository.getAverageAllSleep(sleepData);
-  avgHrsSleptPerday.innerText = displayUser.getSleepInfo(sleepData, 'hoursSlept')
-  avgQualitySleep.innerText = displayUser.getSleepInfo(sleepData, 'sleepQuality')
+  avgHrsSleptPerday.innerText = displayUser.getSleepInfo(sleepData, 'hoursSlept').toFixed(2)
+  avgQualitySleep.innerText = displayUser.getSleepInfo(sleepData, 'sleepQuality').toFixed(2)
   stairClimbed.innerText = displayUser.getTotalStairsClimbed(activityData);
   lastestDayStepsInfo.innerText = displayUser.getLatestDayInfo(activityData, 'numSteps');
   lastestDayActiveInfo.innerText = displayUser.getLatestDayInfo(activityData, 'minutesActive');
@@ -161,10 +161,9 @@ function renderUser() {
 
   } else if (filterWeek) {
     fluidOuncesWeekHeader.innerText = `Average Fluid Ounces on week of ${getShortDate(filterWeek[0])} :`;
-    console.log(filterWeek.map(date => getShortDate(date)));
     userAverageWeekFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData, filterWeek.map(date => getShortDate(date)));
     hrsSleptAcrossSevenDaysHeader.innerText = `Average Sleep Hours on week of ${getShortDate(filterWeek[0])} :`;
-    hrsSleptAcrossSevenDays.innerText = displayUser.getSleepInfo(sleepData, "hoursSlept", filterWeek.map(date => getShortDate(date)));
+    hrsSleptAcrossSevenDays.innerText = displayUser.getSleepInfo(sleepData, "hoursSlept", filterWeek.map(date => getShortDate(date))).toFixed(2);
 
     getActiveMinsOnWeekHeader.innerText = `Minutes Active on week of ${getShortDate(filterWeek[0])} :`;
     weeklyActivityTrack.innerText = JSON.stringify(displayUser.getWeeklyActivityData(activityData, filterWeek.map(date => getShortDate(date))));

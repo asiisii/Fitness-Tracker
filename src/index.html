@@ -25,6 +25,7 @@
       <section class="pages">
         <div class="about" id="about">
           <table class="user-info">
+            <caption>Personal Info</caption>
             <tr>
               <th>Name:</th>
               <td id="userName"></td>
@@ -54,7 +55,7 @@
 
         <div id="stats">
           <table>
-            <caption>Hydration</caption>
+            <caption>Hydration Stats</caption>
             <tr>
              <th id="fluidOuncesHeader">
                Average Fluid Ounces:
@@ -80,6 +81,60 @@
              <td id="lastSevenWaterDays"></td>
            </tr>
          </table>
+         <table>
+          <caption>Sleep Stats</caption>
+          <tr>
+            <th id="avgHrsSleptPerDayHeader">
+              Average Hours Slept/Day :
+            </th>
+            <td id="avgHrsSleptPerday"></td>
+          </tr>
+          <tr>
+            <th id="avgSleepQualityHeader">
+              Average Sleep Quality Over All Time :
+            </th>
+            <td id="avgQualitySleep"></td>
+          </tr>
+          <tr>
+            <th id="hrsSleptByDateHeader">
+              Pick A Date :
+            </th>
+            <td id="hrsSleptByDate"></td>
+          </tr>
+          <tr>
+            <th id="qualitySleepByDateHeader">
+              Pick A Week :
+            </th>
+            <td id="qualitySleepByDate"></td>
+          </tr>
+          <tr>
+            <th id="hrsSleptAcrossSevenDaysHeader">
+              Pick A Week :
+            </th>
+            <td id="hrsSleptAcrossSevenDays"></td>
+          </tr>
+         </table>
+         <table>
+          <caption>Activity Stats</caption>
+          <tr>
+            <th id="lastestDayStepsInfoHeader">
+              # of steps for the latest day :
+            </th>
+            <td id="lastestDayStepsInfo"></td>
+          </tr>
+          <tr>
+            <th id="lastestDayActiveInfoHeader">
+              # of minutes active for the latest day :
+            </th>
+            <td id="lastestDayActiveInfo"></td>
+          </tr>
+          <tr>
+            <th id="lastestDistanceWalkedHeader">
+              miles walked for the latest day :
+            </th>
+            <td id="lastestDistanceWalked"></td>
+          </tr>
+         </table>
         </div>
 
         <div id="comparisons">
@@ -95,20 +150,21 @@
                 <td id="allUsersAvgStepGoal"></td>
               </tr>
             </table>
+            <div id="stepInfo" class="step-info">
+              <canvas id="stepsCompare" width="400" height="100" ></canvas>
+            </div>
+            <div id="minsActiveInfo" class="mins-active-info">
+              <canvas id="minsActiveCompare" width="400" height="100" ></canvas>
+            </div>
+            <div id="stairsClimbedInfo" class="stairs-climbed-info">
+              <canvas id="stairsClimbedCompare" width="400" height="100" ></canvas>
+            </div>
           </div>
           
         </div>
       </section>
     </main>
-    <div id="stepInfo" class="step-info">
-      <canvas id="stepsCompare" width="400" height="100" ></canvas>
-    </div>
-    <div id="minsActiveInfo" class="mins-active-info">
-      <canvas id="minsActiveCompare" width="400" height="100" ></canvas>
-    </div>
-    <div id="stairsClimbedInfo" class="stairs-climbed-info">
-      <canvas id="stairsClimbedCompare" width="400" height="100" ></canvas>
-    </div>
+    
     
    
       
@@ -222,7 +278,7 @@
             </th>
             <td id="allUserAvgMinsActive"></td>
           </tr>
-          <tr>
+          <!-- <tr>
             <th id="lastestDayStepsInfoHeader">
               # of steps for the latest day :
             </th>
@@ -239,7 +295,7 @@
               miles walked for the latest day :
             </th>
             <td id="lastestDistanceWalked"></td>
-          </tr>
+          </tr> -->
           <tr>
             <th id="datesStepGoalAchievedHeader">
               Dates When User Achieved Step Goal :
