@@ -25,6 +25,14 @@ const weeklyActivityTrackHeader = document.getElementById('weeklyActivityTrackHe
 const weeklyActivityTrack = document.getElementById('weeklyActivityTrack');
 const userDropBox = document.getElementById('userDropbox');
 
+const myDailyStepGoal = document.getElementById('myDailyStepGoal')
+const allUsersAvgStepGoal = document.getElementById('allUsersAvgStepGoal')
+const myNumOfSteps =document.getElementById('myNumOfSteps')
+const allUsersAvgSteps =document.getElementById('allUsersAvgSteps')
+const myActiveMins =document.getElementById('myActiveMins')
+const allUsersAvgActiveMins =document.getElementById('allUsersAvgActiveMins')
+const myStairsClimbed =document.getElementById('myStairsClimbed')
+const allUsersAvgStairsClimbed =document.getElementById('allUsersAvgStairsClimbed')
 const avgHrsSleptPerday = document.getElementById('avgHrsSleptPerday')
 const avgQualitySleep = document.getElementById('avgQualitySleep')
 const hrsSleptByDateHeader = document.getElementById('hrsSleptByDateHeader')
@@ -47,7 +55,7 @@ const lastestDayStepsInfo = document.getElementById('lastestDayStepsInfo')
 const lastestDayActiveInfo = document.getElementById('lastestDayActiveInfo')
 const lastestDistanceWalked = document.getElementById('lastestDistanceWalked')
 
-const userInfo = document.getElementById('userInfo');
+// const userInfo = document.getElementById('userInfo');
 const userName = document.getElementById('userName');
 const userAddress = document.getElementById('userAddress');
 const userEmail = document.getElementById('userEmail');
@@ -70,6 +78,7 @@ let displayUser = repository.getUserData(1);
 
 window.addEventListener('DOMContentLoaded', (event) => {
   renderUserList();
+  createCharts();
   renderUser();
   week.value = getWeek(new Date());
   date.value = getDate(new Date());
@@ -78,6 +87,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 date.addEventListener('change', (event) => {
   filterDate = new Date(date.value + ':0:0:0');
   filterWeek = null;
+  createCharts();
   renderUser();
   date.value = getDate(new Date());
 })
@@ -85,6 +95,7 @@ date.addEventListener('change', (event) => {
 week.addEventListener('change', (event) => {
   filterWeek = getDatesOfWeek(getDateForWeek(week.value));
   filterDate = null;
+  createCharts();
   renderUser();
   week.value = getWeek(new Date());
   // console.log(week.value);
@@ -92,6 +103,7 @@ week.addEventListener('change', (event) => {
 
 userDropbox.addEventListener('change', (event) => {
   displayUser = repository.getUserData(Number(userDropbox.value));
+  createCharts();
   renderUser();
 })
 
@@ -100,7 +112,7 @@ function generateTableForChosenSevenDays(parentElement, getData, data, target, d
   let table = "<table>"
   const dates = date ? date : getLastSevenDays(new Date());
   dates.forEach(date => {
-    table += `<tr><th>${getShortDate(date)}</th><td>${getData(data, target, getShortDate(date))}</td></tr>`
+    table += `<tr><th>${getShortDate(date)}:</th><td>${getData(data, target, getShortDate(date))}</td></tr>`
   })
   table += "</table>";
   parentElement.innerHTML = table;
@@ -118,16 +130,26 @@ function renderUserList() {
 
 
 function renderUser() {
-  welcome.innerText = `Welcome ${displayUser.getFirstName()}!`
+  
+  // displayUser = repository.getUserData(Number(userDropbox.value));
+  welcome.innerText = `Welcome, ${displayUser.getFirstName()}!`
   userName.innerText = displayUser.name;
   userAddress.innerText = displayUser.address;
   userEmail.innerText = displayUser.email;
   userStride.innerText = displayUser.strideLength;
   userGoal.innerText = displayUser.dailyStepGoal;
   userFriends.innerText = displayUser.friends.map(friendID => repository.getUserData(friendID).getFirstName()).join(", ");
+  myDailyStepGoal.innerText = displayUser.dailyStepGoal
+  allUsersAvgStepGoal.innerText = repository.getAverageStep()
+  myNumOfSteps.innerText = displayUser.getLatestDayInfo(activityData, 'numSteps')
+  allUsersAvgSteps.innerText = repository.getAvgActivityInfo(activityData, 'numSteps', '2019/09/22')
+  myActiveMins.innerText = displayUser.getLatestDayInfo(activityData, 'minutesActive')
+  allUsersAvgActiveMins.innerText = repository.getAvgActivityInfo(activityData, 'minutesActive', '2019/09/22')
+  myStairsClimbed.innerText = displayUser.getLatestDayInfo(activityData, 'flightsOfStairs')
+  allUsersAvgStairsClimbed.innerText = repository.getAvgActivityInfo(activityData, 'flightsOfStairs', '2019/09/22')
   averageAllSleep.innerText = repository.getAverageAllSleep(sleepData);
-  avgHrsSleptPerday.innerText = displayUser.getSleepInfo(sleepData, 'hoursSlept')
-  avgQualitySleep.innerText = displayUser.getSleepInfo(sleepData, 'sleepQuality')
+  avgHrsSleptPerday.innerText = displayUser.getSleepInfo(sleepData, 'hoursSlept').toFixed(2)
+  avgQualitySleep.innerText = displayUser.getSleepInfo(sleepData, 'sleepQuality').toFixed(2)
   stairClimbed.innerText = displayUser.getTotalStairsClimbed(activityData);
   lastestDayStepsInfo.innerText = displayUser.getLatestDayInfo(activityData, 'numSteps');
   lastestDayActiveInfo.innerText = displayUser.getLatestDayInfo(activityData, 'minutesActive');
@@ -151,10 +173,9 @@ function renderUser() {
 
   } else if (filterWeek) {
     fluidOuncesWeekHeader.innerText = `Average Fluid Ounces on week of ${getShortDate(filterWeek[0])} :`;
-    console.log(filterWeek.map(date => getShortDate(date)));
     userAverageWeekFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData, filterWeek.map(date => getShortDate(date)));
     hrsSleptAcrossSevenDaysHeader.innerText = `Average Sleep Hours on week of ${getShortDate(filterWeek[0])} :`;
-    hrsSleptAcrossSevenDays.innerText = displayUser.getSleepInfo(sleepData, "hoursSlept", filterWeek.map(date => getShortDate(date)));
+    hrsSleptAcrossSevenDays.innerText = displayUser.getSleepInfo(sleepData, "hoursSlept", filterWeek.map(date => getShortDate(date))).toFixed(2);
 
     getActiveMinsOnWeekHeader.innerText = `Minutes Active on week of ${getShortDate(filterWeek[0])} :`;
     weeklyActivityTrack.innerText = JSON.stringify(displayUser.getWeeklyActivityData(activityData, filterWeek.map(date => getShortDate(date))));

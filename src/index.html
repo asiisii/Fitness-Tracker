@@ -2,85 +2,182 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <link rel="stylesheet" href="style.css">
     <title>Activity Tracker</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
   </head>
   <body>
     <header>
       <h1 id="welcome" class="welcome"></h1>
-      <h2 id="userList" class="user-list"></h2>
       <input type="date" id="date" class="date"/>
       <input type="week" id="week" class="week"/>
-      <select id="userDropbox"></select>
+      <select class="user-dropbox" id="userDropbox"></select>
+      <hr>
     </header>
-    <main id="tracker" class="tracker">
-      <section id="userInfo" class="user-info">
-        <table>
+    
+    <section class="select-page">
+      <a href="#about">My Profile</a>
+      <a href="#stats">My Stats</a>
+      <a href="#comparisons">Comparisons</a>
+    </section>
+    
+    <main class="slider">
+      <section class="pages">
+        <div class="about" id="about">
+          <table class="user-info">
+            <caption>Personal Info</caption>
+            <tr>
+              <th>Name:</th>
+              <td id="userName"></td>
+            </tr>
+            <tr>
+              <th>Address:</th>
+              <td id="userAddress"></td>
+            </tr>
+            <tr>
+              <th>Email:</th>
+              <td id="userEmail"></td>
+            </tr>
+            <tr>
+              <th>Stride Length:</th>
+              <td id="userStride"></td>
+            </tr>
+            <tr>
+              <th>Step Goal:</th>
+              <td id="userGoal"></td>
+            </tr>
+            <tr>
+              <th>Your Friends:</th>
+              <td id="userFriends"></td>
+            </tr>
+          </table>   
+        </div>
+
+        <div id="stats">
+          <table>
+            <caption>Hydration Stats</caption>
+            <tr>
+             <th id="fluidOuncesHeader">Average Fluid Ounces:</th>
+             <td id="userAverageFluidOunces"></td>
+           </tr>
+           <tr>
+             <th id="fluidOuncesDateHeader">Pick A Date :</th>
+             <td id="userDateFluidOunces"></td>
+           </tr>
+           <tr>
+             <th id="fluidOuncesWeekHeader">Pick A Week :</th>
+             <td id="userAverageWeekFluidOunces"></td>
+           </tr>
+           <tr>
+             <th id="lastSevenDayWaterHeader">Fluid Ounces Across Selected Seven Days :</th>
+             <td id="lastSevenWaterDays"></td>
+           </tr>
+         </table>
+         <table>
+          <caption>Sleep Stats</caption>
           <tr>
-            <th>
-              Name:
-            </th>
-            <td id="userName"></td>
-          </tr>
-           <tr>
-            <th>
-              Address:
-            </th>
-            <td id="userAddress"></td>
-          </tr>
-           <tr>
-            <th>
-              Email:
-            </th>
-            <td id="userEmail"></td>
-          </tr>
-           <tr>
-            <th>
-              Stride Length:
-            </th>
-            <td id="userStride"></td>
-          </tr>
-           <tr>
-            <th>
-              Step Goal:
-            </th>
-            <td id="userGoal"></td>
-          </tr>
-           <tr>
-            <th>
-              Friends:
-            </th>
-            <td id="userFriends"></td>
-          </tr>
-           <tr>
-            <th id="fluidOuncesHeader">
-              Average Fluid Ounces:
-            </th>
-            <td id="userAverageFluidOunces"></td>
+            <th id="avgHrsSleptPerDayHeader">Average Hours Slept/Day :</th>
+            <td id="avgHrsSleptPerday"></td>
           </tr>
           <tr>
-            <th id="fluidOuncesDateHeader">
-              Pick A Date :
-            </th>
-            <td id="userDateFluidOunces"></td>
+            <th id="avgSleepQualityHeader">Average Sleep Quality Over All Time :</th>
+            <td id="avgQualitySleep"></td>
           </tr>
           <tr>
-            <th id="fluidOuncesWeekHeader">
-              Pick A Week :
-            </th>
-            <td id="userAverageWeekFluidOunces"></td>
+            <th id="hrsSleptByDateHeader">Pick A Date :</th>
+            <td id="hrsSleptByDate"></td>
           </tr>
           <tr>
-            <th id="lastSevenDayWaterHeader">
-              Fluid Ounces Across Selected Seven Days :
-            </th>
-            <td id="lastSevenWaterDays"></td>
+            <th id="qualitySleepByDateHeader">Pick A Week :</th>
+            <td id="qualitySleepByDate"></td>
           </tr>
-        </table>
+          <tr>
+            <th id="hrsSleptAcrossSevenDaysHeader">Pick A Week :</th>
+            <td id="hrsSleptAcrossSevenDays"></td>
+          </tr>
+         </table>
+         <table>
+          <caption>Activity Stats</caption>
+          <tr>
+            <th id="lastestDayStepsInfoHeader"># Of Steps For The Latest Day :</th>
+            <td id="lastestDayStepsInfo"></td>
+          </tr>
+          <tr>
+            <th id="lastestDayActiveInfoHeader"># Of Minutes Active For The Latest Day :</th>
+            <td id="lastestDayActiveInfo"></td>
+          </tr>
+          <tr>
+            <th id="lastestDistanceWalkedHeader">Miles Walked For The Latest Day :</th>
+            <td id="lastestDistanceWalked"></td>
+          </tr>
+         </table>
+        </div>
+
+        <div id="comparisons">
+          <div id="stepGoal" class="step-goal">
+            <canvas id="stepGoalCompare" width="200" height="60" ></canvas>
+            <table>
+              <tr>
+                <th>My Daily Step Goal:</th>
+                <td id="myDailyStepGoal"></td>
+              </tr>
+              <tr>
+                <th>All User's Avg Step Goal:</th>
+                <td id="allUsersAvgStepGoal"></td>
+              </tr>
+            </table>
+            <hr>
+            <div id="stepInfo" class="step-info">
+              <canvas id="stepsCompare" width="400" height="100" ></canvas>
+              <table>
+                <tr>
+                  <th>Your # Of Steps:</th>
+                  <td id="myNumOfSteps"></td>
+                </tr>
+                <tr>
+                  <th>All User's Avg # of Steps:</th>
+                  <td id="allUsersAvgSteps"></td>
+                </tr>
+              </table>
+            </div>
+            <hr>
+            <div id="minsActiveInfo" class="mins-active-info">
+              <canvas id="minsActiveCompare" width="400" height="100" ></canvas>
+              <table>
+                <tr>
+                  <th>My Active Minutes:</th>
+                  <td id="myActiveMins"></td>
+                </tr>
+                <tr>
+                  <th>All User's Avg Active Minutes:</th>
+                  <td id="allUsersAvgActiveMins"></td>
+                </tr>
+              </table>
+            </div>
+            <hr>
+            <div id="stairsClimbedInfo" class="stairs-climbed-info">
+              <canvas id="stairsClimbedCompare" width="400" height="100" ></canvas>
+              <table>
+                <tr>
+                  <th>My Flights Of Stairs Climbed:</th>
+                  <td id="myStairsClimbed"></td>
+                </tr>
+                <tr>
+                  <th>All User's Avg Stairs Cimbed:</th>
+                  <td id="allUsersAvgStairsClimbed"></td>
+                </tr>
+              </table>
+            </div>
+            <hr>
+          </div>
+          
+        </div>
       </section>
-      <div id="hydration" class="hydration">
-      </div>
-      <div id="sleep" class="sleep">
+    </main>
+    
+    
+   
+      
         <table>
           <tr>
             <th id="avgHrsSleptPerDayHeader">
@@ -191,24 +288,6 @@
             <td id="allUserAvgMinsActive"></td>
           </tr>
           <tr>
-            <th id="lastestDayStepsInfoHeader">
-              # of steps for the latest day :
-            </th>
-            <td id="lastestDayStepsInfo"></td>
-          </tr>
-          <tr>
-            <th id="lastestDayActiveInfoHeader">
-              # of minutes active for the latest day :
-            </th>
-            <td id="lastestDayActiveInfo"></td>
-          </tr>
-          <tr>
-            <th id="lastestDistanceWalkedHeader">
-              miles walked for the latest day :
-            </th>
-            <td id="lastestDistanceWalked"></td>
-          </tr>
-          <tr>
             <th id="datesStepGoalAchievedHeader">
               Dates When User Achieved Step Goal :
             </th>
@@ -220,23 +299,10 @@
             </th>
             <td id="weeklyActivityTrack"></td>
           </tr>
-          <div id="stepGoal" class="stepGoal">
-            <canvas id="stepGoalCompare" height="50" ></canvas>
-          </div>
-          <div id="stepInfo" class="step-info">
-            <canvas id="stepsCompare" height="50" ></canvas>
-          </div>
-          <div id="minsActiveInfo" class="mins-active-info">
-            <canvas id="minsActiveCompare" height="50" ></canvas>
-          </div>
-          <div id="stairsClimbedInfo" class="stairs-climbed-info">
-            <canvas id="stairsClimbedCompare" height="50" ></canvas>
-          </div>
+          
       </table>
-      </div>
       <div id="activity" class="activity">
       </div>
-    </main>
     <script type="text/javascript" src="../src/userRepository.js"></script>
     <script type="text/javascript" src="../src/user.js"></script>
     <script type="text/javascript" src="../data/users.js"></script>
