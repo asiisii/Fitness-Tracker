@@ -106,7 +106,7 @@ function generateTableForChosenSevenDays(parentElement, getData, data, target, d
   let table = "<table>"
   const dates = date ? date : getLastSevenDays(new Date());
   dates.forEach(date => {
-    table += `<tr><th>${getShortDate(date)}</th><td>${getData(data, target, getShortDate(date))}</td></tr>`
+    table += `<tr><th>${getShortDate(date)}:</th><td>${getData(data, target, getShortDate(date))}</td></tr>`
   })
   table += "</table>";
   parentElement.innerHTML = table;
