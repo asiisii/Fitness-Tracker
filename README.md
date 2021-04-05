@@ -1,82 +1,60 @@
-# FitLit Starter Kit
+# Title: Poster Generator
 
-The details of this project are outline in [this project spec](http://frontend.turing.io/projects/fitlit.html).
+A [Front-End Project] by [Ashish Malla](https://github.com/asiisii) & [Robert DeRouin](https://github.com/robertjosephderouin)
 
-## Setup
+* Project Manager: [Hannah Hudson](https://github.com/hannahhch)
 
-1. Within your group, decide on one person to have the project repository (repo) on their GitHub account. Then, that person should fork this repo - on the top right corner of this page, click the **Fork** button.
-1. Both memebers of the group should clone down the _forked_ repo. Since you don't want to name your project "activity-tracker-starter", you can use an optional argument when you run git clone (you replace the [...] with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` to install project dependencies.
-1. Run `open src/index.html` in the terminal to see the HTML page (you should see some boilerplate HTML displayed on the page)
-1. Make sure both members of your team are collaborators on the forked repo.
+1. [Overview](#overview)
+2. [Functionality](#functionality)
+3. [Iterations](#iterations)
+4. [Technologies](#technologies)
+5. [Contributors](#contributors)
+6. [Resources](#resources)
 
-## Testing
+## Overview
 
-There is no boilerplate for testing in this starter-kit repo. You will need to set this up yourself. However, if you ran `npm install`, then the tooling you need to start testing is already installed (`mocha` and `chai`).
+The Poster Generator website allows users to generate and save random/non-random image, title, quote combinations to create motivational posters.  
 
-## Linting Your Code
+## Main Page View
 
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit, but that's ok - the linter is still running successfully.
+<img width="1058" alt="Screen Shot 2021-02-14 at 11 24 59 AM" src="https://user-images.githubusercontent.com/72281855/107885414-6d7e5b00-6eb7-11eb-90ec-fde257023660.png">
 
-Your linter will look only at the JavaScript files you have within the `src` and the `test` directories.
+## Saved Poster View
 
-## Data Model
+<img width="1374" alt="Screen Shot 2021-02-14 at 11 27 11 AM" src="https://user-images.githubusercontent.com/72281855/107885452-a3bbda80-6eb7-11eb-851f-402d17fac80b.png">
 
-**Users**
+## Functionality
 
-```
-[
-  {
-    "id": [number],
-    "name": [string],
-    "address": [string],
-    "email": [string],
-    "strideLength": [number - feet],
-    "dailyStepGoal": [number - steps],
-    "friends": [array - one-way connection to other user(s)]
-  },
-  ...more user data
-]
-```
+* Current:
+  * User can navigate between three views. "Saved posters", "create poster", and "current poster".
+  * User can generate a random or custom combination of an image, quote, and title to create a "poster".
+  * User can save their poster to the "saved posters" view where it will be added to an array displayed in a grid format.
+  * User can delete any poster in the "saved posters" view by double clicking.
 
-**Activity**
+* Future Enhancements:
+  * Refactor alt text functionality to reduce the length of the images array.
+  * Implement data validation and error handling into the form (disable button, provide error messages if data entered is not correct, etc).
+  * In the main poster view, allow users to click image, title, quote to update just that piece with another random item from the appropriate array.
+  * When a user single clicks a saved poster, create a modal to view it larger.
+  * Allow users to drag and drop saved posters into whatever order they want them to appear.
 
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "numSteps": [number - steps],
-    "minutesActive": [number - minutes],
-    "flightsOfStairs": [number - flights]
-  },
-  ...more activity data
-]
-```
+* Known Issues/Bugs:
+  * Form has a number of bugs because validation was not part of the base functionality. As an example, if user does not enter poster information on the form view, they can return the main page from the "show my poster" button resulting in an undefined image, title, quote.
+  * Buttons are sometimes not responsive when sharing on zoom call screen share mode.
 
-**Hydration**
+## Technologies
 
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "numOunces": [number - ounces]
-  },
-  ...more hydration data
-]
-```
+1. HTML
+2. CSS
+3. JavaScript
+4. GitHub
 
-**Sleep**
+## Contributors
 
-```
-[
-  {
-    "userID": [number],
-    "date": [string YYYY/MM/DD],
-    "hoursSlept": [number - hours],
-    "sleepQuality": [number - unitless]
-  },
-  ...more sleep data
-]
-```
+* Co-Creator: [Robert DeRouin](https://github.com/robertjosephderouin)
+* Co-Creator: [Ashish Malla](https://github.com/asiisii)
+* Project Manager: [Hannah Hudson](https://github.com/hannahhch)
+
+## Resources
+* Project Description: https://frontend.turing.io/projects/fitlit.html
+* Team GitHub Repo: https://github.com/asiisii/Fitness-Tracker
