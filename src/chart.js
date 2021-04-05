@@ -1,15 +1,12 @@
 const stepGoalCompare = document.getElementById('stepGoalCompare')
-const stepsCompare = document.getElementById('minsActiveCompare')
-const minsActiveCompare = document.getElementById('stepsCompare')
+const stepsCompare = document.getElementById('stepsCompare')
+const minsActiveCompare = document.getElementById('minsActiveCompare')
 const stairsClimbedCompare = document.getElementById('stairsClimbedCompare')
-
 
 const allUserAvgNumSteps = repository.getAvgActivityInfo(activityData, 'numSteps', '2019/09/22')
 const allUserAvgMinutesActive = repository.getAvgActivityInfo(activityData, 'minutesActive', '2019/09/22')
 const allUserAvgFlightsOfStairs = repository.getAvgActivityInfo(activityData, 'flightsOfStairs', '2019/09/22')
-// const aUserNumSteps = displayUser.getLatestDayInfo(activityData, 'numSteps')
-// const aUserMinutesActive = displayUser.getLatestDayInfo(activityData, 'minutesActive')
-// const aUserFlightsOfStairs = displayUser.getLatestDayInfo(activityData, 'flightsOfStairs')
+
 let stepGoalChart = new Chart(stepGoalCompare, {})
 let stepCompareChart = new Chart(stepsCompare, {})
 let activeMinsCompareChart = new Chart(stairsClimbedCompare, {})
@@ -41,6 +38,7 @@ function createCharts() {
       ]
     }
   })
+
   stepCompareChart = new Chart(stepsCompare, {
     type: 'bar',
     data: {
@@ -86,12 +84,11 @@ function createCharts() {
         }]
       }  
     }
-    
   })
+
   activeMinsCompareChart = new Chart(minsActiveCompare, {
     type: 'bar',
     data: {
-      // labels: ["minutes active"],
       datasets: [
         {
           label: "All Users Activity",
@@ -132,8 +129,8 @@ function createCharts() {
         }]
       }  
     }
-    
   })
+
   stairsClimbedCompareChart = new Chart(stairsClimbedCompare, {
     type: 'bar',
     data: {
@@ -178,4 +175,5 @@ function createCharts() {
       }  
     }
   })
+  
 }

@@ -27,6 +27,12 @@ const userDropBox = document.getElementById('userDropbox');
 
 const myDailyStepGoal = document.getElementById('myDailyStepGoal')
 const allUsersAvgStepGoal = document.getElementById('allUsersAvgStepGoal')
+const myNumOfSteps =document.getElementById('myNumOfSteps')
+const allUsersAvgSteps =document.getElementById('allUsersAvgSteps')
+const myActiveMins =document.getElementById('myActiveMins')
+const allUsersAvgActiveMins =document.getElementById('allUsersAvgActiveMins')
+const myStairsClimbed =document.getElementById('myStairsClimbed')
+const allUsersAvgStairsClimbed =document.getElementById('allUsersAvgStairsClimbed')
 const avgHrsSleptPerday = document.getElementById('avgHrsSleptPerday')
 const avgQualitySleep = document.getElementById('avgQualitySleep')
 const hrsSleptByDateHeader = document.getElementById('hrsSleptByDateHeader')
@@ -135,6 +141,12 @@ function renderUser() {
   userFriends.innerText = displayUser.friends.map(friendID => repository.getUserData(friendID).getFirstName()).join(", ");
   myDailyStepGoal.innerText = displayUser.dailyStepGoal
   allUsersAvgStepGoal.innerText = repository.getAverageStep()
+  myNumOfSteps.innerText = displayUser.getLatestDayInfo(activityData, 'numSteps')
+  allUsersAvgSteps.innerText = repository.getAvgActivityInfo(activityData, 'numSteps', '2019/09/22')
+  myActiveMins.innerText = displayUser.getLatestDayInfo(activityData, 'minutesActive')
+  allUsersAvgActiveMins.innerText = repository.getAvgActivityInfo(activityData, 'minutesActive', '2019/09/22')
+  myStairsClimbed.innerText = displayUser.getLatestDayInfo(activityData, 'flightsOfStairs')
+  allUsersAvgStairsClimbed.innerText = repository.getAvgActivityInfo(activityData, 'flightsOfStairs', '2019/09/22')
   averageAllSleep.innerText = repository.getAverageAllSleep(sleepData);
   avgHrsSleptPerday.innerText = displayUser.getSleepInfo(sleepData, 'hoursSlept').toFixed(2)
   avgQualitySleep.innerText = displayUser.getSleepInfo(sleepData, 'sleepQuality').toFixed(2)
