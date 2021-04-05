@@ -25,6 +25,8 @@ const weeklyActivityTrackHeader = document.getElementById('weeklyActivityTrackHe
 const weeklyActivityTrack = document.getElementById('weeklyActivityTrack');
 const userDropBox = document.getElementById('userDropbox');
 
+const myDailyStepGoal = document.getElementById('myDailyStepGoal')
+const allUsersAvgStepGoal = document.getElementById('allUsersAvgStepGoal')
 const avgHrsSleptPerday = document.getElementById('avgHrsSleptPerday')
 const avgQualitySleep = document.getElementById('avgQualitySleep')
 const hrsSleptByDateHeader = document.getElementById('hrsSleptByDateHeader')
@@ -131,6 +133,8 @@ function renderUser() {
   userStride.innerText = displayUser.strideLength;
   userGoal.innerText = displayUser.dailyStepGoal;
   userFriends.innerText = displayUser.friends.map(friendID => repository.getUserData(friendID).getFirstName()).join(", ");
+  myDailyStepGoal.innerText = displayUser.dailyStepGoal
+  allUsersAvgStepGoal.innerText = repository.getAverageStep()
   averageAllSleep.innerText = repository.getAverageAllSleep(sleepData);
   avgHrsSleptPerday.innerText = displayUser.getSleepInfo(sleepData, 'hoursSlept')
   avgQualitySleep.innerText = displayUser.getSleepInfo(sleepData, 'sleepQuality')

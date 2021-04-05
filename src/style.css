@@ -27,7 +27,8 @@ input {
   font-size: 2rem;
 }
 
-.user-info {
+.user-info,
+table {
   margin: 20px auto;
   padding: 10px;
   border: 2px solid white;
