@@ -3,84 +3,75 @@
   <head>
     <meta charset="UTF-8">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <link rel="stylesheet" href="style.css">
     <title>Activity Tracker</title>
   </head>
   <body>
     <header>
       <h1 id="welcome" class="welcome"></h1>
-      <h2 id="userList" class="user-list"></h2>
       <input type="date" id="date" class="date"/>
       <input type="week" id="week" class="week"/>
-      <select id="userDropbox"></select>
+      <select class="userDropbox" id="userDropbox"></select>
+      <table class="user-info">
+        <tr>
+          <th>Name:</th>
+          <td id="userName"></td>
+        </tr>
+        <tr>
+          <th>Address:</th>
+          <td id="userAddress"></td>
+        </tr>
+        <tr>
+          <th>Email:</th>
+          <td id="userEmail"></td>
+        </tr>
+        <tr>
+          <th>Stride Length:</th>
+          <td id="userStride"></td>
+        </tr>
+        <tr>
+          <th>Step Goal:</th>
+          <td id="userGoal"></td>
+        </tr>
+        <tr>
+          <th>Your Friends:</th>
+          <td id="userFriends"></td>
+        </tr>
+      </table>   
+      <hr>
     </header>
-    <main id="tracker" class="tracker">
-      <section id="userInfo" class="user-info">
-        <table>
-          <tr>
-            <th>
-              Name:
-            </th>
-            <td id="userName"></td>
-          </tr>
-           <tr>
-            <th>
-              Address:
-            </th>
-            <td id="userAddress"></td>
-          </tr>
-           <tr>
-            <th>
-              Email:
-            </th>
-            <td id="userEmail"></td>
-          </tr>
-           <tr>
-            <th>
-              Stride Length:
-            </th>
-            <td id="userStride"></td>
-          </tr>
-           <tr>
-            <th>
-              Step Goal:
-            </th>
-            <td id="userGoal"></td>
-          </tr>
-           <tr>
-            <th>
-              Friends:
-            </th>
-            <td id="userFriends"></td>
-          </tr>
-           <tr>
-            <th id="fluidOuncesHeader">
-              Average Fluid Ounces:
-            </th>
-            <td id="userAverageFluidOunces"></td>
-          </tr>
-          <tr>
-            <th id="fluidOuncesDateHeader">
-              Pick A Date :
-            </th>
-            <td id="userDateFluidOunces"></td>
-          </tr>
-          <tr>
-            <th id="fluidOuncesWeekHeader">
-              Pick A Week :
-            </th>
-            <td id="userAverageWeekFluidOunces"></td>
-          </tr>
-          <tr>
-            <th id="lastSevenDayWaterHeader">
-              Fluid Ounces Across Selected Seven Days :
-            </th>
-            <td id="lastSevenWaterDays"></td>
-          </tr>
-        </table>
-      </section>
-      <div id="hydration" class="hydration">
-      </div>
-      <div id="sleep" class="sleep">
+
+    
+    <div id="stepGoal" class="step-goal">
+      <canvas id="stepGoalCompare" width="200" height="90" ></canvas>
+    </div>
+      <table>
+        <tr>
+         <th id="fluidOuncesHeader">
+           Average Fluid Ounces:
+         </th>
+         <td id="userAverageFluidOunces"></td>
+       </tr>
+       <tr>
+         <th id="fluidOuncesDateHeader">
+           Pick A Date :
+         </th>
+         <td id="userDateFluidOunces"></td>
+       </tr>
+       <tr>
+         <th id="fluidOuncesWeekHeader">
+           Pick A Week :
+         </th>
+         <td id="userAverageWeekFluidOunces"></td>
+       </tr>
+       <tr>
+         <th id="lastSevenDayWaterHeader">
+           Fluid Ounces Across Selected Seven Days :
+         </th>
+         <td id="lastSevenWaterDays"></td>
+       </tr>
+     </table>
+      <!-- <div id="sleep" class="sleep"> -->
         <table>
           <tr>
             <th id="avgHrsSleptPerDayHeader">
@@ -220,23 +211,23 @@
             </th>
             <td id="weeklyActivityTrack"></td>
           </tr>
-          <div id="stepGoal" class="stepGoal">
-            <canvas id="stepGoalCompare" height="50" ></canvas>
-          </div>
+          <!-- <div id="stepGoal" class="stepGoal">
+            <canvas id="stepGoalCompare" width="400" height="100" ></canvas>
+          </div> -->
           <div id="stepInfo" class="step-info">
-            <canvas id="stepsCompare" height="50" ></canvas>
+            <canvas id="stepsCompare" width="400" height="100" ></canvas>
           </div>
           <div id="minsActiveInfo" class="mins-active-info">
-            <canvas id="minsActiveCompare" height="50" ></canvas>
+            <canvas id="minsActiveCompare" width="400" height="100" ></canvas>
           </div>
           <div id="stairsClimbedInfo" class="stairs-climbed-info">
-            <canvas id="stairsClimbedCompare" height="50" ></canvas>
+            <canvas id="stairsClimbedCompare" width="400" height="100" ></canvas>
           </div>
       </table>
-      </div>
+      <!-- </div> -->
       <div id="activity" class="activity">
       </div>
-    </main>
+    <!-- </main> -->
     <script type="text/javascript" src="../src/userRepository.js"></script>
     <script type="text/javascript" src="../src/user.js"></script>
     <script type="text/javascript" src="../data/users.js"></script>
