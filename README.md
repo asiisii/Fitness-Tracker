@@ -13,34 +13,16 @@ A [Front-End Project] by [Ashish Malla](https://github.com/asiisii) & [Robert De
 
 ## Overview
 
-The Poster Generator website allows users to generate and save random/non-random image, title, quote combinations to create motivational posters.  
-
-## Main Page View
-
-<img width="1058" alt="Screen Shot 2021-02-14 at 11 24 59 AM" src="https://user-images.githubusercontent.com/72281855/107885414-6d7e5b00-6eb7-11eb-90ec-fde257023660.png">
-
-## Saved Poster View
-
-<img width="1374" alt="Screen Shot 2021-02-14 at 11 27 11 AM" src="https://user-images.githubusercontent.com/72281855/107885452-a3bbda80-6eb7-11eb-851f-402d17fac80b.png">
+The FitLit tracker takes in data and displays it relative to user and relative to specific dates via a week or single day filter.
 
 ## Functionality
 
 * Current:
-  * User can navigate between three views. "Saved posters", "create poster", and "current poster".
-  * User can generate a random or custom combination of an image, quote, and title to create a "poster".
-  * User can save their poster to the "saved posters" view where it will be added to an array displayed in a grid format.
-  * User can delete any poster in the "saved posters" view by double clicking.
+  * User can view the fitness data of a user.
+  * User can change which user's data they are viewing.
+  * User can filter the data by a single day's date.
+  * User can filter the data by an entire week's dates.
 
-* Future Enhancements:
-  * Refactor alt text functionality to reduce the length of the images array.
-  * Implement data validation and error handling into the form (disable button, provide error messages if data entered is not correct, etc).
-  * In the main poster view, allow users to click image, title, quote to update just that piece with another random item from the appropriate array.
-  * When a user single clicks a saved poster, create a modal to view it larger.
-  * Allow users to drag and drop saved posters into whatever order they want them to appear.
-
-* Known Issues/Bugs:
-  * Form has a number of bugs because validation was not part of the base functionality. As an example, if user does not enter poster information on the form view, they can return the main page from the "show my poster" button resulting in an undefined image, title, quote.
-  * Buttons are sometimes not responsive when sharing on zoom call screen share mode.
 
 ## Technologies
 
