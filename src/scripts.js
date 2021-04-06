@@ -164,7 +164,7 @@ function renderUser() {
     hrsSleptAcrossSevenDays.innerText = displayUser.getSleepInfo(sleepData, "hoursSlept", filterWeek.map(date => getShortDate(date))).toFixed(2);
 
 
-    getActiveMinsOnWeekHeader.innerText = `Minutes Active on week of ${getShortDate(filterWeek[0])} :`;
+    // getActiveMinsOnWeekHeader.innerText = `Minutes Active on week of ${getShortDate(filterWeek[0])} :`;
     const weeklyActivity = displayUser.getWeeklyActivityData(activityData, filterWeek.map(date => getShortDate(date)));
     generateTableForWeeklyActivity(activityTable, weeklyActivity);
 
