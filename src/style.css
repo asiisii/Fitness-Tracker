@@ -2,20 +2,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* background-color: #97D4E7; */
-  /* background: linear-gradient(to right top, #729ba3, #729ba3); */
-  
 }
 
 header {
   text-align: center;
   margin: 2%;
   border-radius: 1rem;
-  /* background: linear-gradient(to right top, #729ba3, #729ba3); */
   background-color: #97D4E7;
 }
 
-.welcome{
+.welcome {
   margin: 20px 0;
   font-size: 4rem;
 }
@@ -27,7 +23,6 @@ input {
   font-size: 2rem;
 }
 
-.user-info,
 table {
   margin: 20px auto;
   padding: 10px;
@@ -35,27 +30,21 @@ table {
   border-radius: 1rem;
   font-size: 2rem;
 }
+
 th {
   text-align: right;
 }
+
 td {
   text-align: left;
   font-style: italic;
   padding: 5px;
 } 
-/* .step-goal {
-  width: 50%;
-  float: left;
-} */
 
 hr {
-  /* height: 12px; */
-  /* background-color: #353567; */
   border-bottom: 8px solid #353567;
   border-radius: 15px;
   width: 100%;
-  /* margin-top: 3.5px; */
-  /* margin: 2%; */
 }
 
 /*~~~~~~~~~~Main-Start ~~~~~~~~~~~~~~~*/
@@ -64,11 +53,13 @@ hr {
   background: #97D4E7;
   margin: 2%;
 }
+
 .select-page {
 	display: flex;
 	justify-content: space-between;
   position: relative;
 }
+
 a {
 	font-size: 30px; 
   background: lightblue;
@@ -78,6 +69,7 @@ a {
   padding: 5px;
   margin: 0 3%;
 }
+
 .pages {
   display: flex;
   overflow-x: auto;
@@ -89,9 +81,8 @@ a {
   flex-shrink: 0;
   width: 100%;
   height: 90vh;
-  /* background: gray; */
-
 }
+
 .about {
   margin-top: 7%;
 }

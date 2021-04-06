@@ -5,7 +5,7 @@ const UserRepository = require('../src/userRepository')
 const User = require('../src/user')
 
 describe('User Repository', () => {
-  let sleepData, activityData, userData, usersArray, activityArray, userRepository, userRepository1
+  let sleepData, activityData, userData, usersArray, userRepository
 
   beforeEach(() => {
     sleepData = [
@@ -59,9 +59,7 @@ describe('User Repository', () => {
       },
     ]
     usersArray = userData.map(user => new User(user));
-    activityArray = activityData.map(user => new User(user));
     userRepository = new UserRepository(usersArray);
-    userRepository1 = new UserRepository(activityArray);
   })
 
   it('should be a function', () => {
@@ -79,10 +77,5 @@ describe('User Repository', () => {
   it('should produce an average sleep among all users', () => {
     expect(userRepository.getAverageAllSleep(sleepData)).to.deep.equal(3.45)
   })
-
-  // it('should return avg activity info of all users', () => {
-  //   expect(userRepository1.getAvgActivityInfo(activityData, 'numSteps', '2019/06/15').to.equal(3935.5))
-  // })
-  
 
 })

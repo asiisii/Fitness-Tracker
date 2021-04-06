@@ -69,7 +69,7 @@ describe('User', () => {
         "friends": [ 9, 18, 24, 19 ]
       },
     ]
-    const displayUser = 1
+    
     user = new User(userData)
     user1 = new User(userData[0])
     user2 = new User(userData[1])

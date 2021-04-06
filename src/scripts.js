@@ -2,26 +2,13 @@
 const welcome = document.getElementById('welcome');
 const date = document.getElementById('date');
 const week = document.getElementById('week');
-const fluidOuncesHeader = document.getElementById('fluidOuncesHeader');
 const fluidOuncesDateHeader = document.getElementById('fluidOuncesDateHeader');
 const userDateFluidOunces = document.getElementById('userDateFluidOunces');
 const fluidOuncesWeekHeader = document.getElementById('fluidOuncesWeekHeader');
 const userAverageWeekFluidOunces = document.getElementById('userAverageWeekFluidOunces');
-const lastSevenWaterDaysHeader = document.getElementById('lastSevenWaterDaysHeader');
 const lastSevenWaterDays = document.getElementById('lastSevenWaterDays');
-const averageAllSleepHeader = document.getElementById('averageAllSleepHeader');
-const averageAllSleep = document.getElementById('averageAllSleep');
 const hrsSleptAcrossSevenDaysHeader = document.getElementById('hrsSleptAcrossSevenDaysHeader');
 const hrsSleptAcrossSevenDays = document.getElementById('hrsSleptAcrossSevenDays');
-const lastSevenSleepDaysHeader = document.getElementById('lastSevenSleepDaysHeader');
-const lastSevenSLeepDays = document.getElementById('lastSevenSleepDays');
-const lastSevenSleepQualityDaysHeader = document.getElementById('lastSevenSleepQualityDaysHeader');
-const lastSevenSleepQUalityDays = document.getElementById('lastSevenQualityDays');
-const lastSevenDaysBestSleepsHeader = document.getElementById('lastSevenDaysBestSleepsHeader');
-const lastSevenDaysBestSleeps = document.getElementById('lastSevenDaysBestSleeps');
-const datesStepGoalAchievedHeader = document.getElementById('datesStepGoalAchievedHeader');
-const datesStepGoalAchieved = document.getElementById('datesStepGoalAchieved');
-const weeklyActivityTrackHeader = document.getElementById('weeklyActivityTrackHeader');
 const weeklyActivityTrack = document.getElementById('weeklyActivityTrack');
 const userDropBox = document.getElementById('userDropbox');
 const activityTable = document.getElementById('activity');
@@ -40,23 +27,9 @@ const hrsSleptByDateHeader = document.getElementById('hrsSleptByDateHeader')
 const hrsSleptByDate = document.getElementById('hrsSleptByDate')
 const qualitySleepByDateHeader = document.getElementById('qualitySleepByDateHeader')
 const qualitySleepByDate = document.getElementById('qualitySleepByDate')
-const hypersomnia = document.getElementById('hypersomnia')
-
-const getActiveMinsOnDayHeader = document.getElementById('getActiveMinsOnDayHeader')
-const getActiveMinsOnDay = document.getElementById('getActiveMinsOnDay')
-const getActiveMinsOnWeekHeader = document.getElementById('getActiveMinsOnWeekHeader')
-const getActiveMinsOnWeek = document.getElementById('getActiveMinsOnWeek')
-const checkStepGoal = document.getElementById('checkStepGoal')
-const StepGoalExceedDays = document.getElementById('StepGoalExceedDays')
-const stairClimbed = document.getElementById('stairClimbed')
-const allUserAvgStairsClimbed = document.getElementById('allUserAvgStairsClimbed')
-const allUserAvgStepsTaken = document.getElementById('allUserAvgStepsTaken')
-const allUserAvgMinsActive = document.getElementById('allUserAvgMinsActive')
 const lastestDayStepsInfo = document.getElementById('lastestDayStepsInfo')
 const lastestDayActiveInfo = document.getElementById('lastestDayActiveInfo')
 const lastestDistanceWalked = document.getElementById('lastestDistanceWalked')
-
-// const userInfo = document.getElementById('userInfo');
 const userName = document.getElementById('userName');
 const userAddress = document.getElementById('userAddress');
 const userEmail = document.getElementById('userEmail');
@@ -68,15 +41,26 @@ const userAverageFluidOunces = document.getElementById('userAverageFluidOunces')
 const usersArray = userData.map(user => new User(user))
 const repository = new UserRepository(usersArray);
 
+//---------------------Charts Variables Start----------------//
+const stepGoalCompare = document.getElementById('stepGoalCompare')
+const stepsCompare = document.getElementById('stepsCompare')
+const minsActiveCompare = document.getElementById('minsActiveCompare')
+const stairsClimbedCompare = document.getElementById('stairsClimbedCompare')
+
+const allUserAvgNumSteps = repository.getAvgActivityInfo(activityData, 'numSteps', '2019/09/22')
+const allUserAvgMinutesActive = repository.getAvgActivityInfo(activityData, 'minutesActive', '2019/09/22')
+const allUserAvgFlightsOfStairs = repository.getAvgActivityInfo(activityData, 'flightsOfStairs', '2019/09/22')
+
+let stepGoalChart = new Chart(stepGoalCompare, {})
+let stepCompareChart = new Chart(stepsCompare, {})
+let activeMinsCompareChart = new Chart(stairsClimbedCompare, {})
+//---------------------Charts Variables End----------------//
+
 let filterWeek = null;
 let filterDate = null;
 let displayUser = repository.getUserData(1);
 
-// const avgNumSteps = displayUser.getAvgLatestDayInfoForAllUsers(activityData, 'numSteps')
-// const avgMinutesActive = displayUser.getAvgLatestDayInfoForAllUsers(activityData, 'minutesActive')
-// const avgFlightsOfStairs = displayUser.getAvgLatestDayInfoForAllUsers(activityData, 'flightsOfStairs')
-//EventListeners
-
+//-------------------Event Listeners Start----------------//
 window.addEventListener('DOMContentLoaded', (event) => {
   renderUserList();
   createCharts();
@@ -84,6 +68,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   week.value = getWeek(new Date());
   date.value = getDate(new Date());
 });
+
 // The time is required because of the weird way that HTML and Javascript read a date.
 date.addEventListener('change', (event) => {
   filterDate = new Date(date.value + ':0:0:0');
@@ -99,7 +84,6 @@ week.addEventListener('change', (event) => {
   createCharts();
   renderUser();
   week.value = getWeek(new Date());
-  // console.log(week.value);
 })
 
 userDropbox.addEventListener('change', (event) => {
@@ -107,8 +91,9 @@ userDropbox.addEventListener('change', (event) => {
   createCharts();
   renderUser();
 })
+//-------------------Event Listeners End----------------//
 
-//Functions
+//-------------------Functions Start-------------------//
 function generateTableForChosenSevenDays(parentElement, getData, data, target, date) {
   let table = "<table>"
   const dates = date ? date : getLastSevenDays(new Date());
@@ -139,11 +124,11 @@ function renderUserList() {
 }
 
 //Renders the inner text of the table that stores all the user info.
-
-
 function renderUser() {
 
+
   // displayUser = repository.getUserData(Number(userDropbox.value));
+
   welcome.innerText = `Welcome, ${displayUser.getFirstName()}!`
   userName.innerText = displayUser.name;
   userAddress.innerText = displayUser.address;
@@ -159,10 +144,8 @@ function renderUser() {
   allUsersAvgActiveMins.innerText = repository.getAvgActivityInfo(activityData, 'minutesActive', '2019/09/22')
   myStairsClimbed.innerText = displayUser.getLatestDayInfo(activityData, 'flightsOfStairs')
   allUsersAvgStairsClimbed.innerText = repository.getAvgActivityInfo(activityData, 'flightsOfStairs', '2019/09/22')
-  averageAllSleep.innerText = repository.getAverageAllSleep(sleepData);
   avgHrsSleptPerday.innerText = displayUser.getSleepInfo(sleepData, 'hoursSlept').toFixed(2)
   avgQualitySleep.innerText = displayUser.getSleepInfo(sleepData, 'sleepQuality').toFixed(2)
-  stairClimbed.innerText = displayUser.getTotalStairsClimbed(activityData);
   lastestDayStepsInfo.innerText = displayUser.getLatestDayInfo(activityData, 'numSteps');
   lastestDayActiveInfo.innerText = displayUser.getLatestDayInfo(activityData, 'minutesActive');
   lastestDistanceWalked.innerText = (((displayUser.getLatestDayInfo(activityData, 'numSteps')) * displayUser.strideLength) / 5280).toFixed(2)
@@ -174,20 +157,12 @@ function renderUser() {
     hrsSleptByDate.innerText = displayUser.getSleepInfo(sleepData, 'hoursSlept', getShortDate(filterDate));
     qualitySleepByDateHeader.innerText = `Quality Sleep on ${getShortDate(filterDate)} :`;
     qualitySleepByDate.innerText = displayUser.getSleepInfo(sleepData, 'sleepQuality', getShortDate(filterDate));
-    hypersomnia.innerText = displayUser.getHypersomnia(sleepData, userData, getShortDate(filterDate)) || "No sleep data for any users on this day.";
-
-    getActiveMinsOnDayHeader.innerText = `Minutes Active On ${getShortDate(filterDate)} :`;
-    getActiveMinsOnDay.innerText = displayUser.getActiveMins(activityData, 'minutesActive', getShortDate(filterDate))
-    checkStepGoal.innerText = displayUser.checkSteps(userData, activityData, 'dailyStepGoal', getShortDate(filterDate), displayUser.id)
-    allUserAvgStairsClimbed.innerText = repository.getAvgActivityInfo(activityData, 'flightsOfStairs', getShortDate(filterDate))
-    allUserAvgStepsTaken.innerText = repository.getAvgActivityInfo(activityData, 'numSteps', getShortDate(filterDate))
-    allUserAvgMinsActive.innerText = repository.getAvgActivityInfo(activityData, 'minutesActive', getShortDate(filterDate))
-
   } else if (filterWeek) {
     fluidOuncesWeekHeader.innerText = `Average Fluid Ounces on week of ${getShortDate(filterWeek[0])} :`;
     userAverageWeekFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData, filterWeek.map(date => getShortDate(date)));
     hrsSleptAcrossSevenDaysHeader.innerText = `Average Sleep Hours on week of ${getShortDate(filterWeek[0])} :`;
     hrsSleptAcrossSevenDays.innerText = displayUser.getSleepInfo(sleepData, "hoursSlept", filterWeek.map(date => getShortDate(date))).toFixed(2);
+
 
     getActiveMinsOnWeekHeader.innerText = `Minutes Active on week of ${getShortDate(filterWeek[0])} :`;
     const weeklyActivity = displayUser.getWeeklyActivityData(activityData, filterWeek.map(date => getShortDate(date)));
@@ -198,10 +173,4 @@ function renderUser() {
   }
 
   generateTableForChosenSevenDays(lastSevenWaterDays, displayUser.getAverageData.bind(displayUser), hydrationData, "numOunces", filterWeek);
-  generateTableForChosenSevenDays(lastSevenSleepDays, displayUser.getAverageData.bind(displayUser), sleepData, "hoursSlept", filterWeek);
-  generateTableForChosenSevenDays(lastSevenSleepQualityDays, displayUser.getAverageData.bind(displayUser), sleepData, "sleepQuality", filterWeek);
-  generateTableForChosenSevenDays(getActiveMinsOnWeek, displayUser.getAverageData.bind(displayUser), activityData, "minutesActive", filterWeek)
-
-  lastSevenDaysBestSleeps.innerText =  repository.getArrayOfBestSleepersForSevenDays((filterWeek || []).map(date => getShortDate(date)), sleepData).join(" ");
-  datesStepGoalAchieved.innerText = displayUser.getStepGoalDates(activityData).join(", ");
 }

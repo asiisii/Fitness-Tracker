@@ -1,7 +1,6 @@
 class UserRepository {
   constructor(userArray) {
     this.users = userArray;
-
   }
 
   getUserData(userID) {
@@ -23,6 +22,7 @@ class UserRepository {
     if (!dates) {
       return [];
     }
+    
     const usersForWeek = data.filter(user => dates.some(date => date === user.date))
     const userSleepMap = {};
     usersForWeek.forEach(user => {
