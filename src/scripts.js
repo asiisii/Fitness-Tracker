@@ -24,6 +24,7 @@ const datesStepGoalAchieved = document.getElementById('datesStepGoalAchieved');
 const weeklyActivityTrackHeader = document.getElementById('weeklyActivityTrackHeader');
 const weeklyActivityTrack = document.getElementById('weeklyActivityTrack');
 const userDropBox = document.getElementById('userDropbox');
+const activityTable = document.getElementById('activity');
 
 const myDailyStepGoal = document.getElementById('myDailyStepGoal')
 const allUsersAvgStepGoal = document.getElementById('allUsersAvgStepGoal')
@@ -118,6 +119,17 @@ function generateTableForChosenSevenDays(parentElement, getData, data, target, d
   parentElement.innerHTML = table;
 }
 
+function generateTableForWeeklyActivity(parentElement, dates) {
+
+  let table = "<table>";
+  table += "<tr><th>Date</th><th>Steps</th><th>Minutes Active</th><th>Flights of Stairs</th></tr>"
+  dates.forEach(date => {
+    table += `<tr><th>${date.date}:</th><td>${date.numSteps}</td><td>${date.minutesActive}</td><td>${date.flightsOfStairs}</td></tr>`
+  })
+  table +="</table>";
+  parentElement.innerHTML = table;
+}
+
 function renderUserList() {
   let options = "";
   repository.users.forEach(user => {
@@ -130,7 +142,7 @@ function renderUserList() {
 
 
 function renderUser() {
-  
+
   // displayUser = repository.getUserData(Number(userDropbox.value));
   welcome.innerText = `Welcome, ${displayUser.getFirstName()}!`
   userName.innerText = displayUser.name;
@@ -178,7 +190,8 @@ function renderUser() {
     hrsSleptAcrossSevenDays.innerText = displayUser.getSleepInfo(sleepData, "hoursSlept", filterWeek.map(date => getShortDate(date))).toFixed(2);
 
     getActiveMinsOnWeekHeader.innerText = `Minutes Active on week of ${getShortDate(filterWeek[0])} :`;
-    weeklyActivityTrack.innerText = JSON.stringify(displayUser.getWeeklyActivityData(activityData, filterWeek.map(date => getShortDate(date))));
+    const weeklyActivity = displayUser.getWeeklyActivityData(activityData, filterWeek.map(date => getShortDate(date)));
+    generateTableForWeeklyActivity(activityTable, weeklyActivity);
 
   } else {
     userAverageFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData);
@@ -192,4 +205,3 @@ function renderUser() {
   lastSevenDaysBestSleeps.innerText =  repository.getArrayOfBestSleepersForSevenDays((filterWeek || []).map(date => getShortDate(date)), sleepData).join(" ");
   datesStepGoalAchieved.innerText = displayUser.getStepGoalDates(activityData).join(", ");
 }
-
