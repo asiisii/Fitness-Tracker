@@ -11,6 +11,8 @@ const hrsSleptAcrossSevenDaysHeader = document.getElementById('hrsSleptAcrossSev
 const hrsSleptAcrossSevenDays = document.getElementById('hrsSleptAcrossSevenDays');
 const weeklyActivityTrack = document.getElementById('weeklyActivityTrack');
 const userDropBox = document.getElementById('userDropbox');
+const activityTable = document.getElementById('activity');
+
 const myDailyStepGoal = document.getElementById('myDailyStepGoal')
 const allUsersAvgStepGoal = document.getElementById('allUsersAvgStepGoal')
 const myNumOfSteps =document.getElementById('myNumOfSteps')
@@ -102,6 +104,17 @@ function generateTableForChosenSevenDays(parentElement, getData, data, target, d
   parentElement.innerHTML = table;
 }
 
+function generateTableForWeeklyActivity(parentElement, dates) {
+
+  let table = "<table>";
+  table += "<tr><th>Date</th><th>Steps</th><th>Minutes Active</th><th>Flights of Stairs</th></tr>"
+  dates.forEach(date => {
+    table += `<tr><th>${date.date}:</th><td>${date.numSteps}</td><td>${date.minutesActive}</td><td>${date.flightsOfStairs}</td></tr>`
+  })
+  table +="</table>";
+  parentElement.innerHTML = table;
+}
+
 function renderUserList() {
   let options = "";
   repository.users.forEach(user => {
@@ -112,6 +125,10 @@ function renderUserList() {
 
 //Renders the inner text of the table that stores all the user info.
 function renderUser() {
+
+
+  // displayUser = repository.getUserData(Number(userDropbox.value));
+
   welcome.innerText = `Welcome, ${displayUser.getFirstName()}!`
   userName.innerText = displayUser.name;
   userAddress.innerText = displayUser.address;
@@ -145,11 +162,15 @@ function renderUser() {
     userAverageWeekFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData, filterWeek.map(date => getShortDate(date)));
     hrsSleptAcrossSevenDaysHeader.innerText = `Average Sleep Hours on week of ${getShortDate(filterWeek[0])} :`;
     hrsSleptAcrossSevenDays.innerText = displayUser.getSleepInfo(sleepData, "hoursSlept", filterWeek.map(date => getShortDate(date))).toFixed(2);
-    weeklyActivityTrack.innerText = JSON.stringify(displayUser.getWeeklyActivityData(activityData, filterWeek.map(date => getShortDate(date))));
+
+
+    getActiveMinsOnWeekHeader.innerText = `Minutes Active on week of ${getShortDate(filterWeek[0])} :`;
+    const weeklyActivity = displayUser.getWeeklyActivityData(activityData, filterWeek.map(date => getShortDate(date)));
+    generateTableForWeeklyActivity(activityTable, weeklyActivity);
+
   } else {
     userAverageFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData);
   }
 
   generateTableForChosenSevenDays(lastSevenWaterDays, displayUser.getAverageData.bind(displayUser), hydrationData, "numOunces", filterWeek);
 }
-
