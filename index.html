@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html ang="en">
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../src/style.css">
     <title>Activity Tracker</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
   </head>
@@ -14,13 +16,11 @@
       <select class="user-dropbox" id="userDropbox"></select>
       <hr>
     </header>
-    
     <section class="select-page">
       <a href="#about">My Profile</a>
       <a href="#stats">My Stats</a>
       <a href="#comparisons">Comparisons</a>
     </section>
-    
     <main class="slider">
       <section class="pages">
         <div class="about" id="about">
@@ -52,7 +52,6 @@
             </tr>
           </table>   
         </div>
-
         <div id="stats">
           <table>
             <caption>Hydration Stats</caption>
@@ -111,8 +110,16 @@
             <td id="lastestDistanceWalked"></td>
           </tr>
          </table>
+         <table>
+          <tr>
+            <caption>Weekly Activity Stats</caption>
+            <th id="weeklyActivityTrackHeader">
+              Activity data across selected week :
+            </th>
+            <td id="weeklyActivityTrack"></td>
+          </tr>
+        </table>
         </div>
-
         <div id="comparisons">
           <div id="stepGoal" class="step-goal">
             <canvas id="stepGoalCompare" width="200" height="60" ></canvas>
@@ -170,139 +177,9 @@
             </div>
             <hr>
           </div>
-          
         </div>
       </section>
     </main>
-    
-    
-   
-      
-        <table>
-          <tr>
-            <th id="avgHrsSleptPerDayHeader">
-              Average Hours Slept/Day :
-            </th>
-            <td id="avgHrsSleptPerday"></td>
-          </tr>
-          <tr>
-            <th id="avgSleepQualityHeader">
-              Average Sleep Quality Over All Time :
-            </th>
-            <td id="avgQualitySleep"></td>
-          </tr>
-          <tr>
-            <th id="hrsSleptByDateHeader">
-              Hours Slept on :
-            </th>
-            <td id="hrsSleptByDate"></td>
-          </tr>
-          <tr>
-            <th id="qualitySleepByDateHeader">
-              Quality Slept on :
-            </th>
-            <td id="qualitySleepByDate"></td>
-          </tr>
-          <tr>
-            <th id="hrsSleptAcrossSevenDaysHeader">
-              Hours Slept Across Given Week :
-            </th>
-            <td id="hrsSleptAcrossSevenDays"></td>
-          </tr>
-          <tr>
-            <th id="averageAllSleepHeader">
-              Average Sleep Quality Across All Users :
-            </th>
-            <td id="averageAllSleep"></td>
-          </tr>
-          <tr>
-            <th id="hypersomniaHeader">
-              Hypersomnia award goes to :
-            </th>
-            <td id="hypersomnia"></td>
-          </tr>
-          <tr>
-            <th id="lastSevenSleepDaysHeader">
-              Average Hours Of Sleep Across Selected Seven Days :
-            </th>
-            <td id="lastSevenSleepDays"></td>
-          </tr>
-          <tr>
-            <th id="lastSevenSleepQualityDaysHeader">
-              Average Sleep Quality Across Selected Seven Days :
-            </th>
-            <td id="lastSevenSleepQualityDays"></td>
-          </tr>
-          <tr>
-            <th id="lastSevenDaysBestSleepsHeader">
-              Sleepers Above 3 Quality Across Selected Seven Days :
-            </th>
-            <td id="lastSevenDaysBestSleeps"></td>
-          </tr>
-          <tr>
-            <th id="getActiveMinsOnDayHeader">
-              Minutes Active On :
-            </th>
-            <td id="getActiveMinsOnDay"></td>
-          </tr>
-          <tr>
-            <th id="getActiveMinsOnWeekHeader">
-              Minutes Active Across Selected Seven Days :
-            </th>
-            <td id="getActiveMinsOnWeek"></td>
-          </tr>
-          <tr>
-            <th id="checkStepGoalHeader">
-              Daily Step Goal Result :
-            </th>
-            <td id="checkStepGoal"></td>
-          </tr>
-          <tr>
-            <th id="StepGoalExceedDaysHeader">
-              Daily Step Goal Reached Days :
-            </th>
-            <td id="StepGoalExceedDays"></td>
-          </tr>
-          <tr>
-            <th id="stairClimbedHeader">
-              Stairs climbed record :
-            </th>
-            <td id="stairClimbed"></td>
-          </tr>
-          <tr>
-            <th id="allUserAvgStairsClimbedHeader">
-              All Users Avg Stairs climbed :
-            </th>
-            <td id="allUserAvgStairsClimbed"></td>
-          </tr>
-          <tr>
-            <th id="allUserAvgStepsTakenHeader">
-              All Users Avg Steps Taken :
-            </th>
-            <td id="allUserAvgStepsTaken"></td>
-          </tr>
-          <tr>
-            <th id="allUserAvgMinsActiveHeader">
-              All Users Avg Minutes Active :
-            </th>
-            <td id="allUserAvgMinsActive"></td>
-          </tr>
-          <tr>
-            <th id="datesStepGoalAchievedHeader">
-              Dates When User Achieved Step Goal :
-            </th>
-            <td id="datesStepGoalAchieved"></td>
-          </tr>
-          <tr>
-            <th id="weeklyActivityTrackHeader">
-              Activity data across selected week :
-            </th>
-            <td id="weeklyActivityTrack"></td>
-          </tr>
-          
-      </table>
-      <div id="activity" class="activity">
-      </div>
     <script type="text/javascript" src="../src/userRepository.js"></script>
     <script type="text/javascript" src="../src/user.js"></script>
     <script type="text/javascript" src="../data/users.js"></script>
@@ -310,7 +187,7 @@
     <script type="text/javascript" src="../data/sleep.js"></script>
     <script type="text/javascript" src="../data/activity.js"></script>
     <script type="text/javascript" src="../src/date.js"></script>
-    <script type="text/javascript" src="./scripts.js"></script>
-    <script type="text/javascript" src="./chart.js"></script>
+    <script type="text/javascript" src="../src/scripts.js"></script>
+    <script type="text/javascript" src="../src/chart.js"></script>
   </body>
 </html>

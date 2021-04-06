@@ -1,16 +1,3 @@
-const stepGoalCompare = document.getElementById('stepGoalCompare')
-const stepsCompare = document.getElementById('stepsCompare')
-const minsActiveCompare = document.getElementById('minsActiveCompare')
-const stairsClimbedCompare = document.getElementById('stairsClimbedCompare')
-
-const allUserAvgNumSteps = repository.getAvgActivityInfo(activityData, 'numSteps', '2019/09/22')
-const allUserAvgMinutesActive = repository.getAvgActivityInfo(activityData, 'minutesActive', '2019/09/22')
-const allUserAvgFlightsOfStairs = repository.getAvgActivityInfo(activityData, 'flightsOfStairs', '2019/09/22')
-
-let stepGoalChart = new Chart(stepGoalCompare, {})
-let stepCompareChart = new Chart(stepsCompare, {})
-let activeMinsCompareChart = new Chart(stairsClimbedCompare, {})
-
 function createCharts() {
   stepGoalChart.destroy()
   stepCompareChart.destroy()
@@ -42,7 +29,6 @@ function createCharts() {
   stepCompareChart = new Chart(stepsCompare, {
     type: 'bar',
     data: {
-      // labels: ["# of steps"],
       datasets: [
         {
           label: "All Users Activity",
