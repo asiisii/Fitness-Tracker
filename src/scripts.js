@@ -107,11 +107,11 @@ function generateTableForChosenSevenDays(parentElement, getData, data, target, d
 function generateTableForWeeklyActivity(parentElement, dates) {
 
   let table = "<table>";
-  table += "<tr><th>Date</th><th>Steps</th><th>Minutes Active</th><th>Flights of Stairs</th></tr>"
+  table += "<tr><th>[Date] </th><th> [Steps] </th><th> [Minutes Active] </th><th> [Flights of Stairs] </th></tr>"
   dates.forEach(date => {
-    table += `<tr><th>${date.date}:</th><td>${date.numSteps}</td><td>${date.minutesActive}</td><td>${date.flightsOfStairs}</td></tr>`
+    table += `<tr><th> ${date.date}: </th><td> ${date.numSteps} </td><td> ${date.minutesActive} </td><td> ${date.flightsOfStairs} </td></tr>`
   })
-  table +="</table>";
+  table += "</table>";
   parentElement.innerHTML = table;
 }
 
@@ -125,10 +125,6 @@ function renderUserList() {
 
 //Renders the inner text of the table that stores all the user info.
 function renderUser() {
-
-
-  // displayUser = repository.getUserData(Number(userDropbox.value));
-
   welcome.innerText = `Welcome, ${displayUser.getFirstName()}!`
   userName.innerText = displayUser.name;
   userAddress.innerText = displayUser.address;
@@ -162,9 +158,6 @@ function renderUser() {
     userAverageWeekFluidOunces.innerText = displayUser.getAverageFluidOunces(hydrationData, filterWeek.map(date => getShortDate(date)));
     hrsSleptAcrossSevenDaysHeader.innerText = `Average Sleep Hours on week of ${getShortDate(filterWeek[0])} :`;
     hrsSleptAcrossSevenDays.innerText = displayUser.getSleepInfo(sleepData, "hoursSlept", filterWeek.map(date => getShortDate(date))).toFixed(2);
-
-
-    // getActiveMinsOnWeekHeader.innerText = `Minutes Active on week of ${getShortDate(filterWeek[0])} :`;
     const weeklyActivity = displayUser.getWeeklyActivityData(activityData, filterWeek.map(date => getShortDate(date)));
     generateTableForWeeklyActivity(activityTable, weeklyActivity);
 
