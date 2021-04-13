@@ -29,7 +29,9 @@ Find the site [here!](https://asiisii.github.io/Fitness-Tracker/)
 1. HTML
 2. CSS
 3. JavaScript
-4. GitHub
+4. Mocha
+5. Chai
+6. GitHub
 
 ## Instructions for Running Project
 
